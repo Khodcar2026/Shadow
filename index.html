@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#07060b">
+<title>Shadow VPN</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07060b;
+  --purple:#8b5cf6;
+  --purple-2:#a78bfa;
+  --purple-d:#5b21b6;
+  --glass:rgba(255,255,255,.055);
+  --glass-2:rgba(255,255,255,.09);
+  --stroke:rgba(255,255,255,.11);
+  --stroke-p:rgba(167,139,250,.45);
+  --text:#f4f2fb;
+  --muted:#9d97b5;
+  --ok:#4ade80;
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--text);font-family:'Vazirmatn',system-ui,sans-serif;overscroll-behavior:none}
+body{min-height:100vh;overflow-x:hidden;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+button{font-family:inherit}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+section[id]{scroll-margin-top:12px}
+
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.bg i:nth-child(1){width:320px;height:320px;background:#6d28d9;top:-80px;right:-100px;animation:fl 14s ease-in-out infinite}
+.bg i:nth-child(2){width:280px;height:280px;background:#4c1d95;top:42%;left:-120px;animation:fl 18s ease-in-out infinite reverse}
+.bg i:nth-child(3){width:240px;height:240px;background:#7c3aed;bottom:-60px;right:-40px;opacity:.35;animation:fl 16s ease-in-out infinite}
+@keyframes fl{50%{transform:translate(30px,40px) scale(1.1)}}
+.wrap{max-width:520px;margin:0 auto;padding:18px 16px 0}
+
+.glass{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);
+  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
+  box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07)}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--purple),var(--purple-d));box-shadow:0 6px 22px rgba(139,92,246,.5)}
+.logo .ic{width:22px;height:22px;stroke-width:2}
+.brand b{font-size:17px;font-weight:800;display:block}
+.brand small{font-size:11px;color:var(--muted)}
+.online{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);padding:7px 12px;border-radius:999px}
+.online::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pu 2s infinite}
+@keyframes pu{50%{opacity:.35}}
+
+/* search trigger */
+.sbar{display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;margin-bottom:14px;border-radius:18px;color:var(--muted);font-size:13.5px;cursor:pointer;text-align:right}
+.sbar .ic{color:var(--purple-2)}
+
+/* hero */
+.hero{padding:28px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:14px}
+.hero::after{content:"";position:absolute;inset:auto -20% -60% -20%;height:70%;background:radial-gradient(closest-side,rgba(139,92,246,.35),transparent);pointer-events:none}
+.hero h1{font-size:27px;font-weight:800;line-height:1.6;position:relative}
+.hero h1 span{background:linear-gradient(90deg,#c4b5fd,#8b5cf6,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:2;position:relative}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;position:relative}
+.chip{font-size:11.5px;padding:6px 12px;border-radius:999px;background:var(--glass-2);border:1px solid var(--stroke);color:#d9d3ee;display:flex;align-items:center;gap:6px}
+.chip .ic{width:14px;height:14px;color:var(--purple-2)}
+
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.trust div{padding:14px 8px;text-align:center;border-radius:18px}
+.trust .ic{width:22px;height:22px;color:var(--purple-2);margin-bottom:6px}
+.trust b{display:block;font-size:12px;font-weight:600}
+.trust small{font-size:10.5px;color:var(--muted)}
+
+h2.sec{font-size:15px;font-weight:700;margin:6px 4px 12px;display:flex;align-items:center;gap:8px}
+h2.sec::before{content:"";width:4px;height:16px;border-radius:4px;background:linear-gradient(var(--purple-2),var(--purple-d))}
+
+/* plans */
+.plan{padding:18px;margin-bottom:14px;position:relative;transition:.25s;cursor:pointer}
+.plan:active{transform:scale(.985)}
+.plan.hot{border-color:var(--stroke-p);box-shadow:0 10px 50px rgba(139,92,246,.28),inset 0 1px 0 rgba(255,255,255,.1)}
+.badge{position:absolute;top:-10px;left:16px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:999px;
+  background:linear-gradient(90deg,var(--purple),#c084fc);color:#fff;box-shadow:0 4px 14px rgba(139,92,246,.5)}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.pi{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;color:#ddd6fe;
+  background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(139,92,246,.08));border:1px solid var(--stroke-p)}
+.pi .ic{width:23px;height:23px}
+.ph h3{font-size:16px;font-weight:700}
+.ph small{font-size:11.5px;color:var(--muted)}
+.price{margin-right:auto;text-align:left}
+.price b{font-size:22px;font-weight:800;display:block;line-height:1.2}
+.price small{font-size:11px;color:var(--muted)}
+.feat{list-style:none;display:grid;gap:9px;margin-bottom:16px}
+.feat li{display:flex;align-items:center;gap:9px;font-size:13px;color:#d6d0ea}
+.feat li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;
+  background:rgba(139,92,246,.22) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c4b5fd' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
+.proto{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.proto span{font-size:11.5px;padding:5px 11px;border-radius:10px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);color:#ddd6fe;font-weight:500;direction:ltr}
+
+.btn{width:100%;border:0;cursor:pointer;font-size:14.5px;font-weight:700;color:#fff;padding:14px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 8px 26px rgba(109,40,217,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:.2s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--glass-2);box-shadow:none;border:1px solid var(--stroke);color:var(--text)}
+
+/* calc */
+.calc{padding:18px;margin-bottom:14px}
+.row{margin-bottom:18px}
+.rl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-size:13px}
+.rl small{color:var(--muted);font-size:11px}
+.rl b{font-size:15px;color:var(--purple-2);font-weight:700}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;outline:0;direction:ltr;
+  background:linear-gradient(90deg,var(--purple) var(--p,10%),rgba(255,255,255,.12) var(--p,10%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:6px solid var(--purple);box-shadow:0 2px 14px rgba(139,92,246,.7)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:6px solid var(--purple)}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.25);border:1px solid var(--stroke);border-radius:14px;padding:6px}
+.stepper button{width:40px;height:40px;border-radius:11px;border:0;background:var(--glass-2);color:#fff;font-size:20px;cursor:pointer}
+.stepper button:active{background:var(--purple)}
+.stepper span{font-size:15px;font-weight:700;display:block;text-align:center}
+.stepper em{display:block;font-style:normal;font-size:10.5px;color:var(--muted);font-weight:400;text-align:center}
+.total{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:16px;margin-bottom:14px;
+  background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(139,92,246,.06));border:1px solid var(--stroke-p)}
+.total small{font-size:12px;color:var(--muted)}
+.total b{font-size:22px;font-weight:800}
+.total b i{font-style:normal;font-size:12px;font-weight:500;color:var(--muted);margin-right:4px}
+.break{font-size:11.5px;color:var(--muted);line-height:2;margin:-4px 4px 14px}
+
+/* guide */
+.tabs{display:flex;gap:6px;padding:5px;margin-bottom:12px;border-radius:18px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1 0 auto;border:0;background:none;color:var(--muted);font-size:12px;font-weight:600;padding:10px 12px;border-radius:13px;cursor:pointer;white-space:nowrap;direction:ltr;transition:.2s}
+.tabs button.on{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;box-shadow:0 4px 16px rgba(109,40,217,.45)}
+.guide{padding:18px;margin-bottom:14px}
+.gapp{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid var(--stroke);margin-bottom:6px}
+.gapp .pi{width:40px;height:40px;border-radius:13px}
+.gapp b{display:block;font-size:13.5px;direction:ltr;text-align:right}
+.gapp small{font-size:11.5px;color:var(--muted)}
+.step{display:flex;gap:14px;padding:14px 0}
+.step+.step{border-top:1px dashed var(--stroke)}
+.step .n{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:700;background:rgba(139,92,246,.2);border:1px solid var(--stroke-p);color:#ddd6fe}
+.step b{display:block;font-size:13.5px;margin-bottom:2px}
+.step small{font-size:12px;color:var(--muted);line-height:1.9}
+.gnote{font-size:11.5px;color:var(--muted);line-height:2;padding-top:6px}
+
+.buy{padding:6px 18px;margin-bottom:14px}
+
+/* faq */
+.faq{margin-bottom:14px;overflow:hidden}
+.q{border-top:1px solid var(--stroke)}
+.q:first-child{border-top:0}
+.q button{width:100%;background:none;border:0;color:var(--text);font-size:13.5px;font-weight:600;text-align:right;
+  padding:16px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
+.q button::after{content:"+";font-size:20px;color:var(--purple-2);transition:.25s;font-weight:400}
+.q.open button::after{transform:rotate(45deg)}
+.q div{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:12.5px;color:var(--muted);line-height:2;padding:0 18px}
+.q.open div{max-height:220px;padding-bottom:16px}
+
+.support{padding:20px 18px;text-align:center;margin-bottom:14px}
+.support p{font-size:12.5px;color:var(--muted);line-height:2;margin-bottom:14px}
+footer{text-align:center;font-size:12px;color:#7d7898;margin-top:8px}
+footer b{color:var(--purple-2);font-weight:600}
+
+/* floating nav */
+.nav{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
+  display:flex;align-items:center;gap:2px;padding:6px;border-radius:999px;background:rgba(20,15,34,.72);border:1px solid var(--stroke);
+  backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+.nav button{display:flex;align-items:center;gap:7px;height:42px;min-width:42px;padding:0 12px;border:0;border-radius:999px;background:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:.3s;justify-content:center}
+.nav button span{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .3s,opacity .3s}
+.nav button.on{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;box-shadow:0 4px 18px rgba(109,40,217,.55)}
+.nav button.on span{max-width:70px;opacity:1}
+.nav button.srch{color:var(--purple-2)}
+
+/* overlay / sheets */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s;z-index:50}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;max-width:520px;margin:0 auto;transform:translateY(105%);transition:transform .4s cubic-bezier(.2,.9,.2,1);
+  padding:10px 18px calc(22px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:rgba(18,14,30,.86);
+  border:1px solid var(--stroke);border-bottom:0;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
+.sheet.on{transform:none}
+.grab{width:42px;height:4px;border-radius:4px;background:rgba(255,255,255,.25);margin:0 auto 16px}
+.sheet h4{font-size:16px;margin-bottom:14px;text-align:center}
+.sum{border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);padding:6px 14px;margin-bottom:14px}
+.sum div{display:flex;justify-content:space-between;padding:10px 0;font-size:13px;border-bottom:1px dashed var(--stroke)}
+.sum div:last-child{border:0}
+.sum span{color:var(--muted)}
+.sum .t b{font-size:16px;color:var(--purple-2)}
+.note{font-size:11.5px;color:var(--muted);text-align:center;line-height:2;margin-bottom:14px}
+
+/* search sheet */
+.ssheet{top:0;bottom:auto;border-radius:0 0 28px 28px;border:1px solid var(--stroke);border-top:0;transform:translateY(-105%);padding:calc(14px + env(safe-area-inset-top)) 16px 20px;max-height:82vh;display:flex;flex-direction:column}
+.ssheet.on{transform:none}
+.sinp{display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid var(--stroke-p);margin-bottom:12px}
+.sinp .ic{color:var(--purple-2)}
+.sinp input{flex:1;height:50px;background:none;border:0;outline:0;color:var(--text);font-family:inherit;font-size:14.5px}
+.sinp input::placeholder{color:var(--muted)}
+.sinp button{background:var(--glass-2);border:0;color:var(--text);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+.sinp button .ic{width:16px;height:16px;color:var(--text)}
+.sres{overflow-y:auto;display:grid;gap:8px;align-content:start}
+.sres .lbl{font-size:11.5px;color:var(--muted);margin:4px 4px 2px}
+.sitem{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:var(--glass);border:1px solid var(--stroke);cursor:pointer;text-align:right;color:var(--text)}
+.sitem:active{background:var(--glass-2)}
+.sitem .pi{width:38px;height:38px;border-radius:12px}
+.sitem .pi .ic{width:19px;height:19px}
+.sitem b{display:block;font-size:13px;font-weight:600}
+.sitem small{font-size:11.5px;color:var(--muted)}
+.sempty{text-align:center;color:var(--muted);font-size:13px;line-height:2;padding:24px 10px}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2px}
+.sugg button{border:1px solid var(--stroke);background:var(--glass-2);color:#d9d3ee;font-size:12px;padding:7px 13px;border-radius:999px;cursor:pointer}
+
+.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,30px);background:rgba(30,22,52,.95);border:1px solid var(--stroke-p);
+  padding:11px 20px;border-radius:14px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.rv{opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- icon sprite (Lucide-style, inline) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-game" viewBox="0 0 24 24"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect x="2" y="6" width="20" height="12" rx="4"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M5 20h14"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="3"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-headset" viewBox="0 0 24 24"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-5h3z"/><path d="M3 15a2 2 0 0 0 2 2h1v-5H3z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><path d="M2 9a15 15 0 0 1 20 0"/><path d="M12 20h.01"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+</svg>
+
+<div class="bg"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo"><svg class="ic"><use href="#i-shield"/></svg></div>
+      <div><b>Shadow VPN</b><small>به جمع وصلا بپیوند!</small></div>
+    </div>
+    <div class="online glass">آنلاینیم</div>
+  </header>
+
+  <button class="sbar glass rv" id="sbar"><svg class="ic"><use href="#i-search"/></svg>دنبال چی می‌گردی؟ پلن، آموزش، قیمت...</button>
+
+  <section id="home" class="hero glass rv">
+    <h1>به جمع <span>وصلا</span> بپیوند!</h1>
+    <p id="greet">نت آزاد و بدون دردسر؛ پلنتو انتخاب کن، بقیه‌شو بسپر به ما. کانفیگ‌هامون اختصاصیه و راحت وصل می‌شی.</p>
+    <div class="chips">
+      <span class="chip"><svg class="ic"><use href="#i-zap"/></svg>تحویل سریع</span>
+      <span class="chip"><svg class="ic"><use href="#i-lock"/></svg>اتصال امن</span>
+      <span class="chip"><svg class="ic"><use href="#i-headset"/></svg>پشتیبانی مستقیم</span>
+    </div>
+  </section>
+
+  <div class="trust rv">
+    <div class="glass"><svg class="ic"><use href="#i-zap"/></svg><b>تحویل سریع</b><small>بعد از تأیید پرداخت</small></div>
+    <div class="glass"><svg class="ic"><use href="#i-headset"/></svg><b>پشتیبانی</b><small>مستقیم تو پیوی</small></div>
+    <div class="glass"><svg class="ic"><use href="#i-lock"/></svg><b>امن و خصوصی</b><small>پروتکل‌های مدرن</small></div>
+  </div>
+
+  <section id="plans">
+    <h2 class="sec rv">پلن‌های نامحدود</h2>
+
+    <article class="plan glass hot rv" id="p-gaming" data-plan="gaming">
+      <span class="badge">پیشنهاد گیمرها 🔥</span>
+      <div class="ph">
+        <div class="pi"><svg class="ic"><use href="#i-game"/></svg></div>
+        <div><h3>پلن GAMING</h3><small>نامحدود</small></div>
+        <div class="price"><b>۳۰۰,۰۰۰</b><small>تومان</small></div>
+      </div>
+      <div class="proto"><span>WireGuard</span><span>AmneziaWG</span></div>
+      <ul class="feat">
+        <li>حجمش نامحدوده، هرچقدر خواستی بزن</li>
+        <li>مخصوص گیم آنلاین و تماس تصویری</li>
+        <li>اگه گیر کردی، آموزش و پشتیبانی هست</li>
+      </ul>
+      <button class="btn" data-buy="gaming">می‌خوامش، پلن GAMING</button>
+    </article>
+
+    <article class="plan glass rv" id="p-vip" data-plan="vip">
+      <div class="ph">
+        <div class="pi"><svg class="ic"><use href="#i-crown"/></svg></div>
+        <div><h3>پلن VIP</h3><small>نامحدود</small></div>
+        <div class="price"><b>۲۰۰,۰۰۰</b><small>تومان</small></div>
+      </div>
+      <div class="proto"><span>WireGuard</span><span>OpenVPN</span></div>
+      <ul class="feat">
+        <li>حجم نامحدود، بدون نگرانی</li>
+        <li>مناسب کار، وب‌گردی و شبکه‌های اجتماعی</li>
+        <li>اگه گیر کردی، آموزش و پشتیبانی هست</li>
+      </ul>
+      <button class="btn" data-buy="vip">می‌خوامش، پلن VIP</button>
+    </article>
+
+    <h2 class="sec rv" id="p-v2ray">پلن V2RAYNG حجمی</h2>
+    <div class="calc glass rv">
+      <div class="ph" style="margin-bottom:18px">
+        <div class="pi"><svg class="ic"><use href="#i-zap"/></svg></div>
+        <div><h3>V2RayNG حجمی</h3><small>حجم و مدتو خودت تنظیم کن</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rl"><span>حجم <small>(هر گیگ ۳,۰۰۰ تومن)</small></span><b id="gbV">۲۰ گیگ</b></div>
+        <input type="range" id="gb" min="5" max="500" step="5" value="20">
+      </div>
+
+      <div class="row">
+        <div class="rl"><span>تعداد کاربر <small>(هر کاربر اضافه ۴۵,۰۰۰)</small></span></div>
+        <div class="stepper">
+          <button data-s="u" data-d="1">+</button>
+          <div><span id="uV">۱ کاربر</span><em id="uE">کاربر پایه</em></div>
+          <button data-s="u" data-d="-1">−</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="rl"><span>مدت اشتراک <small>(هر ماه اضافه ۷۵,۰۰۰)</small></span></div>
+        <div class="stepper">
+          <button data-s="m" data-d="1">+</button>
+          <div><span id="mV">۱ ماه</span><em id="mE">ماه پایه</em></div>
+          <button data-s="m" data-d="-1">−</button>
+        </div>
+      </div>
+
+      <div class="break" id="break"></div>
+      <div class="total"><small>جمع کل</small><b id="tot">۶۰,۰۰۰<i>تومان</i></b></div>
+      <button class="btn" data-buy="v2ray">همینو می‌خوام</button>
+    </div>
+  </section>
+
+  <section id="guide">
+    <h2 class="sec rv">راهنمای اتصال</h2>
+    <div class="tabs glass rv" id="tabs">
+      <button class="on" data-g="wg">WireGuard</button>
+      <button data-g="awg">AmneziaWG</button>
+      <button data-g="ovpn">OpenVPN</button>
+      <button data-g="v2">V2RayNG</button>
+    </div>
+    <div class="guide glass rv" id="gbox"></div>
+
+    <h2 class="sec rv">خرید چطوریه؟</h2>
+    <div class="buy glass rv">
+      <div class="step"><div class="n">۱</div><div><b>پلنتو انتخاب کن</b><small>یکی از پلن‌ها رو بزن یا حجم V2Ray رو دلخواه تنظیم کن.</small></div></div>
+      <div class="step"><div class="n">۲</div><div><b>سفارشو تأیید کن</b><small>خلاصه سفارش میاد؛ تأیید کنی می‌ری پیوی ادمین، پیام سفارش هم از قبل آماده‌ست.</small></div></div>
+      <div class="step"><div class="n">۳</div><div><b>پرداخت و دریافت کانفیگ</b><small>بعد از پرداخت، کانفیگ و آموزش وصل شدن همون‌جا تحویلت داده می‌شه.</small></div></div>
+    </div>
+  </section>
+
+  <section id="support">
+    <h2 class="sec rv">سؤال‌های همیشگی</h2>
+    <div class="faq glass rv" id="faq">
+      <div class="q"><button>کدوم پلن برای گیم بهتره؟</button><div>پلن GAMING با WireGuard و AmneziaWG مخصوص گیم آنلاین و تماس تصویریه. اگه بیشتر وب‌گردی و کار داری، VIP هم کفایت می‌کنه.</div></div>
+      <div class="q"><button>فرق نامحدود با حجمی چیه؟</button><div>تو GAMING و VIP محدودیت حجم نداری. تو V2RayNG حجم و مدت و تعداد کاربرو خودت انتخاب می‌کنی و همون قیمت حساب می‌شه.</div></div>
+      <div class="q"><button>پرداخت و تحویل چطوریه؟</button><div>سفارشو که تأیید کنی می‌ری پیوی ادمین. پرداخت و تحویل کانفیگ همون‌جا انجام می‌شه.</div></div>
+      <div class="q"><button>وصل نشدم، چیکار کنم؟</button><div>اول آموزش همین صفحه رو یه نگاه بنداز. اگه بازم نشد، تو پیوی پیام بده تا قدم‌به‌قدم کمکت کنیم.</div></div>
+    </div>
+
+    <div class="support glass rv">
+      <p>سؤالی داری یا مطمئن نیستی کدوم پلن به دردت می‌خوره؟<br>بیا پیوی، راحت حرف بزنیم.</p>
+      <button class="btn ghost" id="contact"><svg class="ic"><use href="#i-chat"/></svg>حرف زدن با پشتیبانی</button>
+    </div>
+    <footer><b>به جمع وصلا بپیوند!</b><br>Shadow VPN © ۲۰۲۶</footer>
+  </section>
+</div>
+
+<!-- floating nav -->
+<nav class="nav" id="nav">
+  <button data-t="home" class="on"><svg class="ic"><use href="#i-home"/></svg><span>خانه</span></button>
+  <button data-t="plans"><svg class="ic"><use href="#i-bag"/></svg><span>پلن‌ها</span></button>
+  <button class="srch" id="navSearch" aria-label="جستجو"><svg class="ic"><use href="#i-search"/></svg></button>
+  <button data-t="guide"><svg class="ic"><use href="#i-book"/></svg><span>راهنما</span></button>
+  <button data-t="support"><svg class="ic"><use href="#i-chat"/></svg><span>پشتیبانی</span></button>
+</nav>
+
+<div class="ov" id="ov"></div>
+
+<!-- search -->
+<div class="sheet ssheet" id="ssheet">
+  <div class="sinp">
+    <svg class="ic"><use href="#i-search"/></svg>
+    <input id="sinp" type="search" placeholder="مثلاً: گیم، قیمت، آیفون، وایرگارد..." autocomplete="off">
+    <button id="sclose" aria-label="بستن"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="sres" id="sres"></div>
+</div>
+
+<!-- order -->
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <h4>سفارشتو چک کن</h4>
+  <div class="sum" id="sum"></div>
+  <p class="note">دکمه پایین رو بزنی، پیام سفارش آماده می‌شه و پیوی ادمین باز می‌شه.<br>پرداخت و تحویل کانفیگ هم همون‌جاست.</p>
+  <button class="btn" id="go"><svg class="ic"><use href="#i-send"/></svg>برو پیوی ادمین</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const ADMIN = "shadowVPN_admin";
+  const PRICE = { gb: 3000, user: 45000, month: 75000 };
+  const PLANS = {
+    gaming: { name: "GAMING نامحدود", icon: "🎮", price: 300000, proto: "WireGuard و AmneziaWG", vol: "نامحدود" },
+    vip:    { name: "VIP نامحدود",    icon: "👑", price: 200000, proto: "WireGuard و OpenVPN",   vol: "نامحدود" }
+  };
+
+  const tg = window.Telegram && Telegram.WebApp;
+  if (tg) {
+    try {
+      tg.ready(); tg.expand();
+      tg.setHeaderColor("#07060b"); tg.setBackgroundColor("#07060b");
+      tg.disableVerticalSwipes && tg.disableVerticalSwipes();
+      const u = tg.initDataUnsafe && tg.initDataUnsafe.user;
+      if (u && u.first_name) document.getElementById("greet").textContent =
+        "سلام " + u.first_name + " 👋 خوش اومدی! پلنتو انتخاب کن، بقیه‌شو بسپر به ما؛ کانفیگ‌ها اختصاصیه و راحت وصل می‌شی.";
+    } catch (e) {}
+  }
+  const haptic = (t = "light") => { try { tg.HapticFeedback.impactOccurred(t); } catch (e) {} };
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const fa = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+  const money = n => fa(n.toLocaleString("en-US"));
+  const toast = t => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); setTimeout(() => el.classList.remove("on"), 2200); };
+  const ico = id => `<svg class="ic"><use href="#i-${id}"/></svg>`;
+
+  /* ---------- calculator ---------- */
+  const st = { gb: 20, users: 1, months: 1 };
+  const gbEl = $("#gb");
+  function calc() {
+    const g = st.gb * PRICE.gb, u = (st.users - 1) * PRICE.user, m = (st.months - 1) * PRICE.month;
+    return { g, u, m, total: g + u + m };
+  }
+  function renderCalc() {
+    const c = calc();
+    $("#gbV").textContent = fa(st.gb) + " گیگ";
+    $("#uV").textContent = fa(st.users) + " کاربر";
+    $("#uE").textContent = st.users === 1 ? "کاربر پایه" : fa(st.users - 1) + " کاربر اضافه";
+    $("#mV").textContent = fa(st.months) + " ماه";
+    $("#mE").textContent = st.months === 1 ? "ماه پایه" : fa(st.months - 1) + " ماه اضافه";
+    $("#tot").innerHTML = money(c.total) + "<i>تومان</i>";
+    let b = "حجم: " + money(c.g) + " ت";
+    if (c.u) b += " • کاربر اضافه: " + money(c.u) + " ت";
+    if (c.m) b += " • ماه اضافه: " + money(c.m) + " ت";
+    $("#break").textContent = b;
+    gbEl.style.setProperty("--p", ((st.gb - 5) / 495 * 100) + "%");
+  }
+  gbEl.addEventListener("input", () => { st.gb = +gbEl.value; renderCalc(); });
+  gbEl.addEventListener("change", () => haptic());
+  $$("[data-s]").forEach(b => b.addEventListener("click", () => {
+    const k = b.dataset.s === "u" ? "users" : "months";
+    st[k] = Math.min(k === "users" ? 20 : 12, Math.max(1, st[k] + (+b.dataset.d)));
+    haptic(); renderCalc();
+  }));
+  renderCalc();
+
+  /* ---------- order ---------- */
+  let order = null;
+  function buildOrder(key) {
+    if (key === "v2ray") {
+      const c = calc();
+      return {
+        title: "V2RayNG حجمی",
+        rows: [["حجم", fa(st.gb) + " گیگ"], ["تعداد کاربر", fa(st.users)], ["مدت", fa(st.months) + " ماه"]],
+        total: c.total,
+        text: `سلام 👋\nمی‌خوام این پلنو بخرم (از وب‌اپ):\n\n⚡ V2RayNG حجمی\n• حجم: ${st.gb} گیگ\n• کاربر: ${st.users}\n• مدت: ${st.months} ماه\n💰 مبلغ: ${c.total.toLocaleString("en-US")} تومان`
+      };
+    }
+    const p = PLANS[key];
+    return {
+      title: "پلن " + p.name,
+      rows: [["پروتکل‌ها", p.proto], ["حجم", p.vol]],
+      total: p.price,
+      text: `سلام 👋\nمی‌خوام این پلنو بخرم (از وب‌اپ):\n\n${p.icon} پلن ${p.name}\n• پروتکل: ${p.proto}\n💰 مبلغ: ${p.price.toLocaleString("en-US")} تومان`
+    };
+  }
+  function openSheet(key) {
+    order = buildOrder(key);
+    $("#sum").innerHTML =
+      `<div><span>پلن</span><b>${order.title}</b></div>` +
+      order.rows.map(r => `<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("") +
+      `<div class="t"><span>مبلغ قابل پرداخت</span><b>${money(order.total)} تومان</b></div>`;
+    closeSearch(true);
+    $("#ov").classList.add("on"); $("#sheet").classList.add("on"); haptic("medium");
+  }
+  function closeSheet() { $("#sheet").classList.remove("on"); if (!$("#ssheet").classList.contains("on")) $("#ov").classList.remove("on"); }
+  $$("[data-buy]").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); openSheet(b.dataset.buy); }));
+  $$(".plan").forEach(p => p.addEventListener("click", () => openSheet(p.dataset.plan)));
+
+  function openAdmin(text) {
+    const url = "https://t.me/" + ADMIN + (text ? "?text=" + encodeURIComponent(text) : "");
+    try { if (tg && tg.openTelegramLink) { tg.openTelegramLink(url); return; } } catch (e) {}
+    window.open(url, "_blank");
+  }
+  $("#go").addEventListener("click", () => {
+    haptic("medium");
+    try { navigator.clipboard && navigator.clipboard.writeText(order.text); } catch (e) {}
+    closeSheet(); openAdmin(order.text);
+  });
+  $("#contact").addEventListener("click", () => { haptic(); openAdmin(""); });
+
+  /* ---------- connection guide ---------- */
+  const GUIDE = {
+    wg: {
+      app: "WireGuard", plat: "اندروید • iOS • ویندوز • مک",
+      steps: [
+        ["اپ رو نصب کن", "اپ رسمی WireGuard رو از استور گوشی یا سایت خودش نصب کن."],
+        ["کانفیگتو بگیر", "بعد از خرید، ادمین فایل کانفیگ یا QR رو برات می‌فرسته."],
+        ["ایمپورتش کن", "تو اپ علامت + رو بزن و «Import from file» یا «Scan QR code» رو انتخاب کن."],
+        ["وصل شو", "سوییچ کنار اسم کانفیگ رو روشن کن. تمام! 🎉"]
+      ]
+    },
+    awg: {
+      app: "AmneziaWG", plat: "اندروید • iOS • ویندوز • مک",
+      steps: [
+        ["اپ رو نصب کن", "اپ AmneziaWG یا Amnezia VPN رو نصب کن؛ اگه مطمئن نیستی کدوم، از ادمین بپرس."],
+        ["کانفیگتو بگیر", "فایل کانفیگ یا QR رو از ادمین بگیر."],
+        ["ایمپورتش کن", "تو اپ گزینه افزودن تونل رو بزن و فایل یا QR رو بده بهش."],
+        ["وصل شو", "تونل رو روشن کن و برو سراغ بازیت. 🎮"]
+      ]
+    },
+    ovpn: {
+      app: "OpenVPN Connect", plat: "اندروید • iOS • ویندوز • مک",
+      steps: [
+        ["اپ رو نصب کن", "اپ OpenVPN Connect رو نصب کن."],
+        ["فایل .ovpn رو بگیر", "ادمین فایلی با پسوند ovpn برات می‌فرسته."],
+        ["ایمپورتش کن", "تو اپ بخش Upload File رو بزن و فایل رو انتخاب کن. اگه نام‌کاربری و رمز دادیم، وارد کن."],
+        ["وصل شو", "روی Connect بزن و تموم."]
+      ]
+    },
+    v2: {
+      app: "v2rayNG", plat: "اندروید: v2rayNG • ویندوز: v2rayN • iOS: اپ‌های سازگار",
+      steps: [
+        ["اپ رو نصب کن", "تو اندروید v2rayNG، تو ویندوز v2rayN. برای آیفون ادمین بهت اپ مناسب رو معرفی می‌کنه."],
+        ["لینک کانفیگ رو کپی کن", "بعد از خرید، لینک اشتراک یا کانفیگ رو از ادمین می‌گیری."],
+        ["ایمپورتش کن", "تو اپ + رو بزن و «Import config from clipboard» رو انتخاب کن."],
+        ["وصل شو", "کانفیگو انتخاب کن و دکمه اتصال رو بزن. ✅"]
+      ]
+    }
+  };
+  function showGuide(k) {
+    const g = GUIDE[k];
+    $$("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.g === k));
+    $("#gbox").innerHTML =
+      `<div class="gapp"><div class="pi">${ico("phone")}</div><div><b>${g.app}</b><small>${g.plat}</small></div></div>` +
+      g.steps.map((s, i) => `<div class="step"><div class="n">${fa(i + 1)}</div><div><b>${s[0]}</b><small>${s[1]}</small></div></div>`).join("") +
+      `<p class="gnote">هنوز وصل نشدی؟ نگران نباش، تو پیوی پیام بده تا همراهیت کنیم.</p>`;
+  }
+  $$("#tabs button").forEach(b => b.addEventListener("click", () => { showGuide(b.dataset.g); haptic(); }));
+  showGuide("wg");
+
+  /* ---------- faq ---------- */
+  $$(".q button").forEach(b => b.addEventListener("click", () => {
+    const q = b.parentElement, was = q.classList.contains("open");
+    $$(".q").forEach(x => x.classList.remove("open"));
+    if (!was) q.classList.add("open");
+    haptic();
+  }));
+
+  /* ---------- navigation ---------- */
+  const go = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); };
+  $$("#nav [data-t]").forEach(b => b.addEventListener("click", () => { haptic(); go(b.dataset.t); }));
+  const secs = ["home", "plans", "guide", "support"].map(id => document.getElementById(id));
+  function spy() {
+    let cur = "home";
+    const y = window.innerHeight * 0.4;
+    secs.forEach(s => { if (s.getBoundingClientRect().top <= y) cur = s.id; });
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 8) cur = "support";
+    $$("#nav [data-t]").forEach(b => b.classList.toggle("on", b.dataset.t === cur));
+  }
+  window.addEventListener("scroll", spy, { passive: true }); spy();
+
+  /* ---------- search ---------- */
+  const norm = s => String(s).toLowerCase()
+    .replace(/ي/g, "ی").replace(/ك/g, "ک").replace(/[آأإ]/g, "ا")
+    .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+    .replace(/[\u200c\u064b-\u065f]/g, " ").replace(/\s+/g, " ").trim();
+
+  const INDEX = [
+    { t: "پلن GAMING نامحدود", s: "۳۰۰ هزار تومان • WireGuard و AmneziaWG", i: "game", k: "گیم گیمینگ بازی gaming پینگ ۳۰۰ سیصد نامحدود amnezia وایرگارد", a: () => go("p-gaming") },
+    { t: "پلن VIP نامحدود", s: "۲۰۰ هزار تومان • WireGuard و OpenVPN", i: "crown", k: "وی آی پی vip ارزان ۲۰۰ دویست نامحدود openvpn", a: () => go("p-vip") },
+    { t: "پلن V2RayNG حجمی", s: "هر گیگ ۳ هزار تومان", i: "zap", k: "وی تو ری v2ray v2rayng حجمی گیگ حجم کاربر ماه قیمت", a: () => go("p-v2ray") },
+    { t: "قیمت‌ها و ماشین‌حساب حجم", s: "حجم، کاربر و ماه دلخواه", i: "bag", k: "قیمت تعرفه هزینه محاسبه گیگ کاربر اضافه ماه اضافه ۴۵ ۷۵", a: () => go("p-v2ray") },
+    { t: "آموزش WireGuard", s: "نصب و ایمپورت کانفیگ", i: "book", k: "وایرگارد wireguard آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("wg"); } },
+    { t: "آموزش AmneziaWG", s: "نصب و ایمپورت کانفیگ", i: "book", k: "امنزیا amnezia awg آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("awg"); } },
+    { t: "آموزش OpenVPN", s: "ایمپورت فایل ovpn", i: "book", k: "اوپن وی پی ان openvpn ovpn آموزش نصب اتصال", a: () => { go("guide"); showGuide("ovpn"); } },
+    { t: "آموزش V2RayNG", s: "اندروید، ویندوز و iOS", i: "book", k: "v2ray v2rayng v2rayn آیفون ios اندروید ویندوز آموزش نصب لینک", a: () => { go("guide"); showGuide("v2"); } },
+    { t: "خرید چطوریه؟", s: "مراحل سفارش و تحویل", i: "bag", k: "خرید سفارش پرداخت تحویل مراحل کارت", a: () => go("guide") },
+    { t: "کدوم پلن برای گیم بهتره؟", s: "سؤال متداول", i: "help", k: "سوال گیم بهتر پلن بازی", a: () => openFaq(0) },
+    { t: "فرق نامحدود با حجمی", s: "سؤال متداول", i: "help", k: "سوال فرق نامحدود حجمی", a: () => openFaq(1) },
+    { t: "پرداخت و تحویل", s: "سؤال متداول", i: "help", k: "سوال پرداخت تحویل کانفیگ زمان", a: () => openFaq(2) },
+    { t: "وصل نشدم، چیکار کنم؟", s: "سؤال متداول", i: "help", k: "وصل نمیشه مشکل اتصال خطا کار نمیکنه رفع", a: () => openFaq(3) },
+    { t: "ارتباط با پشتیبانی", s: "پیوی ادمین", i: "chat", k: "پشتیبانی ادمین پیوی پیام تماس ارتباط پشتیبان", a: () => openAdmin("") }
+  ];
+  function openFaq(n) {
+    go("support");
+    setTimeout(() => { $$(".q").forEach((q, i) => q.classList.toggle("open", i === n)); }, 350);
+  }
+  const SUGG = ["گیم", "قیمت", "آیفون", "وایرگارد", "پشتیبانی", "وصل نمیشه"];
+
+  function renderSearch(q) {
+    const box = $("#sres");
+    const nq = norm(q);
+    if (!nq) {
+      box.innerHTML = `<div class="lbl">پیشنهادها</div><div class="sugg">${SUGG.map(s => `<button data-q="${s}">${s}</button>`).join("")}</div>` +
+        `<div class="lbl" style="margin-top:8px">همه موارد</div>` + INDEX.slice(0, 5).map(itemHtml).join("");
+      bind(INDEX.slice(0, 5)); return;
+    }
+    const words = nq.split(" ");
+    const res = INDEX.filter(it => { const hay = norm(it.t + " " + it.s + " " + it.k); return words.every(w => hay.includes(w)); });
+    if (!res.length) { box.innerHTML = `<div class="sempty">چیزی پیدا نکردم 🤔<br>یه کلمه دیگه امتحان کن یا بیا پیوی بپرس.</div><button class="btn ghost" id="sAsk">${ico("chat")}بپرس از پشتیبانی</button>`; $("#sAsk").onclick = () => openAdmin(""); return; }
+    box.innerHTML = res.map(itemHtml).join(""); bind(res);
+  }
+  const itemHtml = it => `<button class="sitem" data-id="${INDEX.indexOf(it)}"><div class="pi">${ico(it.i)}</div><div><b>${it.t}</b><small>${it.s}</small></div></button>`;
+  function bind() {
+    $$("#sres .sitem").forEach(b => b.addEventListener("click", () => { const it = INDEX[+b.dataset.id]; haptic(); closeSearch(); setTimeout(it.a, 250); }));
+    $$("#sres .sugg button").forEach(b => b.addEventListener("click", () => { $("#sinp").value = b.dataset.q; renderSearch(b.dataset.q); }));
+  }
+  function openSearch() {
+    closeSheet();
+    $("#ov").classList.add("on"); $("#ssheet").classList.add("on");
+    $("#sinp").value = ""; renderSearch("");
+    setTimeout(() => $("#sinp").focus(), 300); haptic();
+  }
+  function closeSearch(keepOv) {
+    $("#ssheet").classList.remove("on"); $("#sinp").blur();
+    if (!keepOv && !$("#sheet").classList.contains("on")) $("#ov").classList.remove("on");
+  }
+  $("#sbar").addEventListener("click", openSearch);
+  $("#navSearch").addEventListener("click", openSearch);
+  $("#sclose").addEventListener("click", () => closeSearch());
+  $("#sinp").addEventListener("input", e => renderSearch(e.target.value));
+  $("#ov").addEventListener("click", () => { closeSearch(); closeSheet(); $("#ov").classList.remove("on"); });
+
+  /* ---------- reveal ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .06 });
+  $$(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 60 + "ms"; io.observe(el); });
+})();
+</script>
+</body>
+</html>

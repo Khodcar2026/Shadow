@@ -3,148 +3,239 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#07060b">
-<title>Shadow VPN</title>
+<meta name="theme-color" content="#0a0905">
+<title>FerdosiVPN</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07060b;
-  --purple:#8b5cf6;
-  --purple-2:#a78bfa;
-  --purple-d:#5b21b6;
+  --bg:#0a0905;
+  --a:#facc15;
+  --a2:#fde047;
+  --ad:#a16207;
+  --ar:250,204,21;
+  --on:#171203;
+  --grad:linear-gradient(135deg,#fde047,#eab308 60%,#ca8a04);
   --glass:rgba(255,255,255,.055);
   --glass-2:rgba(255,255,255,.09);
   --stroke:rgba(255,255,255,.11);
-  --stroke-p:rgba(167,139,250,.45);
-  --text:#f4f2fb;
-  --muted:#9d97b5;
+  --stroke-a:rgba(var(--ar),.42);
+  --text:#f8f5ea;
+  --muted:#a8a28c;
   --ok:#4ade80;
+  --er:#fb7185;
   --r:22px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 html,body{background:var(--bg);color:var(--text);font-family:'Vazirmatn',system-ui,sans-serif;overscroll-behavior:none}
-body{min-height:100vh;overflow-x:hidden;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+body{min-height:100vh;overflow-x:hidden;padding-bottom:calc(130px + env(safe-area-inset-bottom))}
 button{font-family:inherit}
 .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-section[id]{scroll-margin-top:12px}
+section[id],div[id^="t-"],article[id]{scroll-margin-top:12px}
 
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
-.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
-.bg i:nth-child(1){width:320px;height:320px;background:#6d28d9;top:-80px;right:-100px;animation:fl 14s ease-in-out infinite}
-.bg i:nth-child(2){width:280px;height:280px;background:#4c1d95;top:42%;left:-120px;animation:fl 18s ease-in-out infinite reverse}
-.bg i:nth-child(3){width:240px;height:240px;background:#7c3aed;bottom:-60px;right:-40px;opacity:.35;animation:fl 16s ease-in-out infinite}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
+.bg i:nth-child(1){width:320px;height:320px;background:#ca8a04;top:-80px;right:-100px;animation:fl 14s ease-in-out infinite}
+.bg i:nth-child(2){width:280px;height:280px;background:#854d0e;top:42%;left:-120px;animation:fl 18s ease-in-out infinite reverse}
+.bg i:nth-child(3){width:240px;height:240px;background:#eab308;bottom:-60px;right:-40px;opacity:.28;animation:fl 16s ease-in-out infinite}
 @keyframes fl{50%{transform:translate(30px,40px) scale(1.1)}}
 .wrap{max-width:520px;margin:0 auto;padding:18px 16px 0}
 
 .glass{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);
   backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
-  box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07)}
+  box-shadow:0 10px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07)}
 
 /* header */
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;
-  background:linear-gradient(135deg,var(--purple),var(--purple-d));box-shadow:0 6px 22px rgba(139,92,246,.5)}
-.logo .ic{width:22px;height:22px;stroke-width:2}
-.brand b{font-size:17px;font-weight:800;display:block}
-.brand small{font-size:11px;color:var(--muted)}
-.online{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);padding:7px 12px;border-radius:999px}
-.online::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pu 2s infinite}
-@keyframes pu{50%{opacity:.35}}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{position:relative;flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:var(--on);
+  background:var(--grad);box-shadow:0 6px 22px rgba(var(--ar),.35)}
+.logo .ic{width:22px;height:22px;stroke-width:2.2}
+.logo::after{content:"";position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2.5px solid var(--bg);box-shadow:0 0 10px var(--ok)}
+.brand b{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;letter-spacing:.2px;direction:ltr;justify-content:flex-end}
+.brand small{font-size:11px;color:var(--muted);display:block;margin-top:1px}
+.pbadge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0;padding:3px 9px;border-radius:8px;color:#fff;direction:rtl;
+  background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 3px 12px rgba(139,92,246,.5);white-space:nowrap}
+.pbadge[hidden]{display:none}
+.hb{position:relative;flex:none;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;cursor:pointer;color:var(--a);padding:0}
+.hb .cnt{position:absolute;top:-7px;left:-7px;min-width:20px;height:20px;border-radius:99px;background:var(--grad);color:var(--on);font-size:11px;font-weight:800;display:none;place-items:center;padding:0 5px;box-shadow:0 3px 10px rgba(var(--ar),.5)}
+.hb .cnt.on{display:grid}
 
-/* search trigger */
 .sbar{display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;margin-bottom:14px;border-radius:18px;color:var(--muted);font-size:13.5px;cursor:pointer;text-align:right}
-.sbar .ic{color:var(--purple-2)}
+.sbar .ic{color:var(--a)}
 
 /* hero */
 .hero{padding:28px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:14px}
-.hero::after{content:"";position:absolute;inset:auto -20% -60% -20%;height:70%;background:radial-gradient(closest-side,rgba(139,92,246,.35),transparent);pointer-events:none}
+.hero::after{content:"";position:absolute;inset:auto -20% -60% -20%;height:70%;background:radial-gradient(closest-side,rgba(var(--ar),.28),transparent);pointer-events:none}
 .hero h1{font-size:27px;font-weight:800;line-height:1.6;position:relative}
-.hero h1 span{background:linear-gradient(90deg,#c4b5fd,#8b5cf6,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 span{background:linear-gradient(90deg,#fde68a,#facc15,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:2;position:relative}
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;position:relative}
-.chip{font-size:11.5px;padding:6px 12px;border-radius:999px;background:var(--glass-2);border:1px solid var(--stroke);color:#d9d3ee;display:flex;align-items:center;gap:6px}
-.chip .ic{width:14px;height:14px;color:var(--purple-2)}
+.chip{font-size:11.5px;padding:6px 12px;border-radius:999px;background:var(--glass-2);border:1px solid var(--stroke);color:#ece6cf;display:flex;align-items:center;gap:6px}
+.chip .ic{width:14px;height:14px;color:var(--a)}
+.chip.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pu 2s infinite}
+@keyframes pu{50%{opacity:.35}}
+
+/* banner */
+.bnr{margin-bottom:22px}
+.bw{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r)}
+.bw::-webkit-scrollbar{display:none}
+.bsw{flex:0 0 100%;scroll-snap-align:center;padding:0 2px}
+.bs{position:relative;overflow:hidden;min-height:158px;padding:18px;border-radius:var(--r);cursor:pointer;border:1px solid var(--stroke-a);
+  background:linear-gradient(135deg,rgba(var(--ar),.2),rgba(255,255,255,.03) 65%);box-shadow:0 10px 36px rgba(0,0,0,.4)}
+.bs .bi{position:absolute;left:-18px;bottom:-26px;color:var(--a);opacity:.13;pointer-events:none}
+.bs .bi .ic{width:170px;height:170px;stroke-width:1.1}
+.bs .bt{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--grad);color:var(--on)}
+.bs .bt .ic{width:12px;height:12px;stroke-width:2.4}
+.bs h3{font-size:19px;font-weight:800;margin:10px 0 4px;position:relative}
+.bs p{font-size:12px;color:#cfc9b3;line-height:1.9;position:relative;max-width:78%}
+.bs .bp{display:flex;align-items:baseline;gap:6px;margin-top:10px;position:relative}
+.bs .bp strong{font-size:22px;font-weight:800;color:var(--a2)}
+.bs .bp em{font-style:normal;font-size:11.5px;color:var(--muted)}
+.bs .bc{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--a)}
+.bs .bc .ic{width:16px;height:16px}
+.bd{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.bd i{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.2);transition:.3s}
+.bd i.on{width:20px;background:var(--a)}
 
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
 .trust div{padding:14px 8px;text-align:center;border-radius:18px}
-.trust .ic{width:22px;height:22px;color:var(--purple-2);margin-bottom:6px}
+.trust .ic{width:22px;height:22px;color:var(--a);margin-bottom:6px}
 .trust b{display:block;font-size:12px;font-weight:600}
 .trust small{font-size:10.5px;color:var(--muted)}
 
 h2.sec{font-size:15px;font-weight:700;margin:6px 4px 12px;display:flex;align-items:center;gap:8px}
-h2.sec::before{content:"";width:4px;height:16px;border-radius:4px;background:linear-gradient(var(--purple-2),var(--purple-d))}
+h2.sec .ic{color:var(--a);width:19px;height:19px}
 
 /* plans */
-.plan{padding:18px;margin-bottom:14px;position:relative;transition:.25s;cursor:pointer}
-.plan:active{transform:scale(.985)}
-.plan.hot{border-color:var(--stroke-p);box-shadow:0 10px 50px rgba(139,92,246,.28),inset 0 1px 0 rgba(255,255,255,.1)}
-.badge{position:absolute;top:-10px;left:16px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:999px;
-  background:linear-gradient(90deg,var(--purple),#c084fc);color:#fff;box-shadow:0 4px 14px rgba(139,92,246,.5)}
+.plan{padding:18px;margin-bottom:14px;position:relative;transition:.25s}
+.plan.hot{border-color:var(--stroke-a);box-shadow:0 10px 50px rgba(var(--ar),.18),inset 0 1px 0 rgba(255,255,255,.1)}
+.plan.test{border:1px dashed var(--stroke-a)}
+.badge{position:absolute;top:-10px;left:16px;display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:999px;
+  background:var(--grad);color:var(--on);box-shadow:0 4px 14px rgba(var(--ar),.4)}
+.badge .ic{width:12px;height:12px;stroke-width:2.4}
 .ph{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.pi{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;color:#ddd6fe;
-  background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(139,92,246,.08));border:1px solid var(--stroke-p)}
+.pi{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;color:var(--a2);flex:none;
+  background:linear-gradient(135deg,rgba(var(--ar),.28),rgba(var(--ar),.06));border:1px solid var(--stroke-a)}
 .pi .ic{width:23px;height:23px}
 .ph h3{font-size:16px;font-weight:700}
 .ph small{font-size:11.5px;color:var(--muted)}
 .price{margin-right:auto;text-align:left}
 .price b{font-size:22px;font-weight:800;display:block;line-height:1.2}
 .price small{font-size:11px;color:var(--muted)}
-.feat{list-style:none;display:grid;gap:9px;margin-bottom:16px}
-.feat li{display:flex;align-items:center;gap:9px;font-size:13px;color:#d6d0ea}
-.feat li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;
-  background:rgba(139,92,246,.22) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c4b5fd' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
+.feat{list-style:none;display:grid;gap:10px;margin-bottom:16px}
+.feat li{display:flex;align-items:center;gap:10px;font-size:13px;color:#e4dec6}
+.feat li .ic{width:17px;height:17px;color:var(--a);flex:none}
 .proto{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.proto span{font-size:11.5px;padding:5px 11px;border-radius:10px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);color:#ddd6fe;font-weight:500;direction:ltr}
+.proto span{display:flex;align-items:center;gap:6px;font-size:11.5px;padding:5px 11px;border-radius:10px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.32);color:#fde68a;font-weight:500;direction:ltr}
+.proto .ic{width:13px;height:13px}
 
-.btn{width:100%;border:0;cursor:pointer;font-size:14.5px;font-weight:700;color:#fff;padding:14px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;
-  background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 8px 26px rgba(109,40,217,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:.2s}
+.btn{width:100%;border:0;cursor:pointer;font-size:14.5px;font-weight:700;color:var(--on);padding:14px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--grad);box-shadow:0 8px 26px rgba(var(--ar),.28),inset 0 1px 0 rgba(255,255,255,.4);transition:.2s}
 .btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.55;pointer-events:none}
 .btn.ghost{background:var(--glass-2);box-shadow:none;border:1px solid var(--stroke);color:var(--text)}
+.btn.sm{padding:11px;font-size:13px;border-radius:14px}
+.btn .ic{width:18px;height:18px}
+.btns{display:grid;grid-template-columns:1.25fr 1fr;gap:8px}
 
 /* calc */
 .calc{padding:18px;margin-bottom:14px}
 .row{margin-bottom:18px}
-.rl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-size:13px}
+.rl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-size:13px;gap:8px}
+.rl>span{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.rl>span .ic{width:16px;height:16px;color:var(--a)}
 .rl small{color:var(--muted);font-size:11px}
-.rl b{font-size:15px;color:var(--purple-2);font-weight:700}
+.rl b{font-size:15px;color:var(--a2);font-weight:700;flex:none}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;outline:0;direction:ltr;
-  background:linear-gradient(90deg,var(--purple) var(--p,10%),rgba(255,255,255,.12) var(--p,10%))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:6px solid var(--purple);box-shadow:0 2px 14px rgba(139,92,246,.7)}
-input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:6px solid var(--purple)}
-.stepper{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.25);border:1px solid var(--stroke);border-radius:14px;padding:6px}
-.stepper button{width:40px;height:40px;border-radius:11px;border:0;background:var(--glass-2);color:#fff;font-size:20px;cursor:pointer}
-.stepper button:active{background:var(--purple)}
+  background:linear-gradient(90deg,var(--a) var(--p,10%),rgba(255,255,255,.12) var(--p,10%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:6px solid var(--a);box-shadow:0 2px 14px rgba(var(--ar),.6)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:6px solid var(--a)}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.28);border:1px solid var(--stroke);border-radius:14px;padding:6px}
+.stepper button{width:40px;height:40px;border-radius:11px;border:0;background:var(--glass-2);color:#fff;cursor:pointer;display:grid;place-items:center}
+.stepper button:active{background:var(--a);color:var(--on)}
 .stepper span{font-size:15px;font-weight:700;display:block;text-align:center}
 .stepper em{display:block;font-style:normal;font-size:10.5px;color:var(--muted);font-weight:400;text-align:center}
 .total{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:16px;margin-bottom:14px;
-  background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(139,92,246,.06));border:1px solid var(--stroke-p)}
+  background:linear-gradient(135deg,rgba(var(--ar),.22),rgba(var(--ar),.05));border:1px solid var(--stroke-a)}
 .total small{font-size:12px;color:var(--muted)}
 .total b{font-size:22px;font-weight:800}
 .total b i{font-style:normal;font-size:12px;font-weight:500;color:var(--muted);margin-right:4px}
 .break{font-size:11.5px;color:var(--muted);line-height:2;margin:-4px 4px 14px}
+.hint{display:none;font-size:12px;line-height:2;padding:10px 12px;border-radius:14px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.3);margin-bottom:14px;color:#fde68a}
+.hint.on{display:flex;gap:8px;align-items:flex-start}
+.hint .ic{width:16px;height:16px;margin-top:6px;color:var(--a)}
+.hint button{background:none;border:0;color:var(--a);font-weight:700;font-size:12px;cursor:pointer;text-decoration:underline;margin-right:6px}
+
+/* compare */
+.cmp{padding:6px;margin-bottom:14px;overflow-x:auto}
+.cmp table{width:100%;border-collapse:separate;border-spacing:0;font-size:11.5px;min-width:320px}
+.cmp th,.cmp td{padding:11px 5px;text-align:center;border-bottom:1px dashed var(--stroke);vertical-align:middle;line-height:1.8}
+.cmp th:first-child,.cmp td:first-child{text-align:right;color:var(--muted);width:58px;padding-right:10px}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{font-size:12px;font-weight:700}
+.cmp .hl{background:rgba(var(--ar),.1)}
+.cmp td b{display:block;font-size:12.5px}
+.cmp td small{font-size:10px;color:var(--muted)}
+.cmp .ltr{direction:ltr}
+.cmp .cb{border:0;cursor:pointer;color:var(--on);font-size:11px;font-weight:700;padding:9px 4px;border-radius:11px;background:var(--grad);width:100%}
+
+/* tools */
+.tool{padding:18px;margin-bottom:14px}
+.tool .sub{font-size:12px;color:var(--muted);line-height:2;margin-bottom:14px}
+.opts{display:grid;gap:8px;margin-bottom:4px}
+.opt{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:15px;border:1px solid var(--stroke);background:var(--glass);color:var(--text);font-size:13px;cursor:pointer;text-align:right;transition:.2s}
+.opt:active{background:rgba(var(--ar),.22);border-color:var(--stroke-a)}
+.opt .ic{color:var(--a)}
+.dots{display:flex;gap:6px;margin-bottom:12px}
+.dots i{height:4px;flex:1;border-radius:4px;background:rgba(255,255,255,.12);transition:.3s}
+.dots i.on{background:var(--grad)}
+.qt{font-size:14px;font-weight:600;margin-bottom:12px;line-height:1.9}
+.res{padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(var(--ar),.22),rgba(var(--ar),.05));border:1px solid var(--stroke-a);margin-bottom:12px}
+.res b{display:block;font-size:16px;margin-bottom:6px}
+.res p{font-size:12.5px;color:#d9d3b9;line-height:2}
+.res .pr{font-size:20px;font-weight:800;margin-top:6px;display:block;color:var(--a2)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.tile{padding:14px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);min-width:0}
+.tile small{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);margin-bottom:4px}
+.tile small .ic{width:13px;height:13px;color:var(--a)}
+.tile b{font-size:14px;font-weight:700;display:block;word-break:break-all;line-height:1.7}
+.tile b.ld{opacity:.5;animation:pu 1s infinite}
+.tile b.ltr{direction:ltr;text-align:right}
+.prev{font-size:11.5px;color:var(--muted);line-height:2;margin-top:10px}
+.code{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.3);border:1px dashed var(--stroke-a);margin-bottom:12px}
+.code b{font-size:18px;letter-spacing:2px;direction:ltr;font-weight:800;color:var(--a2)}
+.fld{width:100%;height:46px;border-radius:14px;border:1px solid var(--stroke);background:rgba(0,0,0,.32);color:var(--text);font-family:inherit;font-size:13.5px;padding:0 14px;outline:0}
+.fld:focus{border-color:var(--stroke-a)}
+.fld::placeholder{color:var(--muted)}
+textarea.fld{height:96px;padding:12px 14px;resize:none;direction:ltr;text-align:left;line-height:1.6;font-size:12px;margin-bottom:10px}
+.inl{display:flex;gap:8px}
+.inl .btn{width:auto;padding:0 20px;border-radius:14px;font-size:13px}
+.msg{font-size:11.5px;line-height:1.9;margin:6px 4px 0;min-height:20px}
+.msg.ok{color:var(--ok)}
+.msg.er{color:var(--er)}
+.priv{font-size:11px;color:var(--muted);line-height:1.9;margin:8px 4px 12px}
 
 /* guide */
 .tabs{display:flex;gap:6px;padding:5px;margin-bottom:12px;border-radius:18px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{flex:1 0 auto;border:0;background:none;color:var(--muted);font-size:12px;font-weight:600;padding:10px 12px;border-radius:13px;cursor:pointer;white-space:nowrap;direction:ltr;transition:.2s}
-.tabs button.on{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;box-shadow:0 4px 16px rgba(109,40,217,.45)}
+.tabs button.on{background:var(--grad);color:var(--on);box-shadow:0 4px 16px rgba(var(--ar),.3)}
 .guide{padding:18px;margin-bottom:14px}
-.gapp{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid var(--stroke);margin-bottom:6px}
+.gapp{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);margin-bottom:6px}
 .gapp .pi{width:40px;height:40px;border-radius:13px}
 .gapp b{display:block;font-size:13.5px;direction:ltr;text-align:right}
 .gapp small{font-size:11.5px;color:var(--muted)}
 .step{display:flex;gap:14px;padding:14px 0}
 .step+.step{border-top:1px dashed var(--stroke)}
-.step .n{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:700;background:rgba(139,92,246,.2);border:1px solid var(--stroke-p);color:#ddd6fe}
+.step .n{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:700;background:rgba(var(--ar),.16);border:1px solid var(--stroke-a);color:var(--a2)}
+.step .n .ic{width:16px;height:16px}
 .step b{display:block;font-size:13.5px;margin-bottom:2px}
 .step small{font-size:12px;color:var(--muted);line-height:1.9}
 .gnote{font-size:11.5px;color:var(--muted);line-height:2;padding-top:6px}
-
 .buy{padding:6px 18px;margin-bottom:14px}
 
 /* faq */
@@ -152,48 +243,91 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .q{border-top:1px solid var(--stroke)}
 .q:first-child{border-top:0}
 .q button{width:100%;background:none;border:0;color:var(--text);font-size:13.5px;font-weight:600;text-align:right;
-  padding:16px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
-.q button::after{content:"+";font-size:20px;color:var(--purple-2);transition:.25s;font-weight:400}
+  padding:16px 18px;display:flex;align-items:center;cursor:pointer;gap:10px}
+.q button .ic{width:18px;height:18px;color:var(--a)}
+.q button span{flex:1}
+.q button::after{content:"+";font-size:20px;color:var(--a);transition:.25s;font-weight:400}
 .q.open button::after{transform:rotate(45deg)}
 .q div{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:12.5px;color:var(--muted);line-height:2;padding:0 18px}
-.q.open div{max-height:220px;padding-bottom:16px}
+.q.open div{max-height:260px;padding-bottom:16px}
 
 .support{padding:20px 18px;text-align:center;margin-bottom:14px}
 .support p{font-size:12.5px;color:var(--muted);line-height:2;margin-bottom:14px}
-footer{text-align:center;font-size:12px;color:#7d7898;margin-top:8px}
-footer b{color:var(--purple-2);font-weight:600}
+footer{text-align:center;font-size:12px;color:#85806a;margin-top:8px}
+footer b{color:var(--a);font-weight:600}
 
-/* floating nav */
+/* floating nav + cart pill */
 .nav{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
-  display:flex;align-items:center;gap:2px;padding:6px;border-radius:999px;background:rgba(20,15,34,.72);border:1px solid var(--stroke);
-  backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
-.nav button{display:flex;align-items:center;gap:7px;height:42px;min-width:42px;padding:0 12px;border:0;border-radius:999px;background:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:.3s;justify-content:center}
+  display:flex;align-items:center;gap:1px;padding:6px;border-radius:999px;background:rgba(20,17,8,.74);border:1px solid var(--stroke);
+  backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);box-shadow:0 12px 40px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.08)}
+.nav button{display:flex;align-items:center;gap:6px;height:42px;min-width:40px;padding:0 10px;border:0;border-radius:999px;background:none;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:.3s;justify-content:center}
 .nav button span{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .3s,opacity .3s}
-.nav button.on{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;box-shadow:0 4px 18px rgba(109,40,217,.55)}
-.nav button.on span{max-width:70px;opacity:1}
-.nav button.srch{color:var(--purple-2)}
+.nav button.on{background:var(--grad);color:var(--on);box-shadow:0 4px 18px rgba(var(--ar),.4)}
+.nav button.on span{max-width:64px;opacity:1}
+.nav button.srch{color:var(--a)}
+.fab{position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:39;display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;border:0;cursor:pointer;background:var(--grad);color:var(--on);font-weight:700;font-size:12.5px;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(var(--ar),.35)}
+.fab.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.fab .ic{width:17px;height:17px;stroke-width:2.2}
 
 /* overlay / sheets */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s;z-index:50}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s;z-index:50}
 .ov.on{opacity:1;pointer-events:auto}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;max-width:520px;margin:0 auto;transform:translateY(105%);transition:transform .4s cubic-bezier(.2,.9,.2,1);
-  padding:10px 18px calc(22px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:rgba(18,14,30,.86);
+  padding:10px 18px calc(22px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:rgba(18,15,7,.92);max-height:92vh;overflow-y:auto;
   border:1px solid var(--stroke);border-bottom:0;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
 .sheet.on{transform:none}
+#rsheet{z-index:70}
 .grab{width:42px;height:4px;border-radius:4px;background:rgba(255,255,255,.25);margin:0 auto 16px}
-.sheet h4{font-size:16px;margin-bottom:14px;text-align:center}
-.sum{border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);padding:6px 14px;margin-bottom:14px}
-.sum div{display:flex;justify-content:space-between;padding:10px 0;font-size:13px;border-bottom:1px dashed var(--stroke)}
+.sheet h4{font-size:16px;margin-bottom:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.sheet h4 .ic{color:var(--a)}
+.sum{border-radius:16px;background:rgba(0,0,0,.3);border:1px solid var(--stroke);padding:6px 14px;margin-bottom:14px}
+.sum div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:13px;border-bottom:1px dashed var(--stroke)}
 .sum div:last-child{border:0}
-.sum span{color:var(--muted)}
-.sum .t b{font-size:16px;color:var(--purple-2)}
-.note{font-size:11.5px;color:var(--muted);text-align:center;line-height:2;margin-bottom:14px}
+.sum span{color:var(--muted);flex:none}
+.sum b{text-align:left}
+.sum .t b{font-size:16px;color:var(--a2)}
+.sec2{font-size:12px;color:var(--muted);margin:2px 4px 8px;display:flex;align-items:center;gap:6px}
+.sec2 .ic{width:14px;height:14px;color:var(--a)}
+.note{font-size:11.5px;color:var(--muted);text-align:center;line-height:2;margin:12px 0 14px}
+.sw{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 12px;font-size:13px;cursor:pointer}
+.sw span{display:flex;align-items:center;gap:8px}
+.sw span .ic{color:var(--a);width:18px;height:18px}
+.sw i{width:44px;height:26px;border-radius:99px;background:rgba(255,255,255,.14);position:relative;transition:.25s;flex:none}
+.sw i::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.25s}
+.sw.on i{background:var(--a)}
+.sw.on i::after{right:21px}
+.gift{display:none;gap:8px;margin-bottom:6px}
+.gift.on{display:grid}
+
+/* cart */
+.ci{display:grid;grid-template-columns:auto 1fr;gap:10px 12px;padding:12px;border-radius:18px;background:rgba(0,0,0,.28);border:1px solid var(--stroke);margin-bottom:8px}
+.ci .pi{width:42px;height:42px;border-radius:14px}
+.ci .cm{min-width:0}
+.ci .cm b{display:block;font-size:13.5px}
+.ci .cm small{display:block;font-size:11px;color:var(--muted);line-height:1.8}
+.ci .ca{grid-column:1/-1;display:flex;align-items:center;gap:10px;padding-top:8px;border-top:1px dashed var(--stroke)}
+.cq{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.05);border-radius:12px;padding:3px}
+.cq button{width:30px;height:30px;border-radius:9px;border:0;background:var(--glass-2);color:var(--text);display:grid;place-items:center;cursor:pointer}
+.cq button .ic{width:15px;height:15px}
+.cq span{min-width:22px;text-align:center;font-weight:700;font-size:13px}
+.cp{margin-right:auto;font-size:13.5px;font-weight:800;color:var(--a2)}
+.cx{width:34px;height:34px;border-radius:11px;border:1px solid var(--stroke);background:none;color:var(--er);display:grid;place-items:center;cursor:pointer}
+.cx .ic{width:16px;height:16px}
+.cempty{display:none;text-align:center;padding:26px 10px 8px}
+.cempty .pi{width:68px;height:68px;border-radius:22px;margin:0 auto 14px}
+.cempty .pi .ic{width:32px;height:32px}
+.cempty p{font-size:13px;color:var(--muted);line-height:2;margin-bottom:16px}
+.cfull{display:none}
+.clear{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px;background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;padding:8px}
+.clear .ic{width:14px;height:14px}
 
 /* search sheet */
-.ssheet{top:0;bottom:auto;border-radius:0 0 28px 28px;border:1px solid var(--stroke);border-top:0;transform:translateY(-105%);padding:calc(14px + env(safe-area-inset-top)) 16px 20px;max-height:82vh;display:flex;flex-direction:column}
+.ssheet{top:0;bottom:auto;border-radius:0 0 28px 28px;border:1px solid var(--stroke);border-top:0;transform:translateY(-105%);padding:calc(14px + env(safe-area-inset-top)) 16px 20px;max-height:82vh;display:flex;flex-direction:column;overflow:hidden}
 .ssheet.on{transform:none}
-.sinp{display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid var(--stroke-p);margin-bottom:12px}
-.sinp .ic{color:var(--purple-2)}
+.sinp{display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:16px;background:rgba(0,0,0,.32);border:1px solid var(--stroke-a);margin-bottom:12px}
+.sinp .ic{color:var(--a)}
 .sinp input{flex:1;height:50px;background:none;border:0;outline:0;color:var(--text);font-family:inherit;font-size:14.5px}
 .sinp input::placeholder{color:var(--muted)}
 .sinp button{background:var(--glass-2);border:0;color:var(--text);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
@@ -208,10 +342,10 @@ footer b{color:var(--purple-2);font-weight:600}
 .sitem small{font-size:11.5px;color:var(--muted)}
 .sempty{text-align:center;color:var(--muted);font-size:13px;line-height:2;padding:24px 10px}
 .sugg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2px}
-.sugg button{border:1px solid var(--stroke);background:var(--glass-2);color:#d9d3ee;font-size:12px;padding:7px 13px;border-radius:999px;cursor:pointer}
+.sugg button{border:1px solid var(--stroke);background:var(--glass-2);color:#ece6cf;font-size:12px;padding:7px 13px;border-radius:999px;cursor:pointer}
 
-.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,30px);background:rgba(30,22,52,.95);border:1px solid var(--stroke-p);
-  padding:11px 20px;border-radius:14px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:132px;left:50%;transform:translate(-50%,30px);background:rgba(30,25,10,.96);border:1px solid var(--stroke-a);max-width:92vw;text-align:center;line-height:1.8;
+  padding:11px 20px;border-radius:14px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 .rv{opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.2,.8,.2,1)}
@@ -232,14 +366,51 @@ footer b{color:var(--purple-2);font-weight:600}
   <symbol id="i-crown" viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/><path d="M5 20h14"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="3"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
   <symbol id="i-headset" viewBox="0 0 24 24"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-5h3z"/><path d="M3 15a2 2 0 0 0 2 2h1v-5H3z"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></symbol>
-  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><path d="M2 9a15 15 0 0 1 20 0"/><path d="M12 20h.01"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
   <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" x2="15.4" y1="13.5" y2="17.5"/><line x1="15.4" x2="8.6" y1="6.5" y2="10.5"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M16 14v4M12 18h.01M8 18h.01"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
+  <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+  <symbol id="i-chevl" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
 </svg>
 
 <div class="bg"><i></i><i></i><i></i></div>
@@ -248,9 +419,12 @@ footer b{color:var(--purple-2);font-weight:600}
   <header>
     <div class="brand">
       <div class="logo"><svg class="ic"><use href="#i-shield"/></svg></div>
-      <div><b>Shadow VPN</b><small>به جمع وصلا بپیوند!</small></div>
+      <div>
+        <b>FerdosiVPN<span class="pbadge" id="pbadge" hidden>نسخه همکاری</span></b>
+        <small>به جمع وصلا بپیوند!</small>
+      </div>
     </div>
-    <div class="online glass">آنلاینیم</div>
+    <button class="hb glass" id="hcart" aria-label="سبد خرید"><svg class="ic"><use href="#i-cart"/></svg><span class="cnt" id="hcnt">0</span></button>
   </header>
 
   <button class="sbar glass rv" id="sbar"><svg class="ic"><use href="#i-search"/></svg>دنبال چی می‌گردی؟ پلن، آموزش، قیمت...</button>
@@ -259,53 +433,81 @@ footer b{color:var(--purple-2);font-weight:600}
     <h1>به جمع <span>وصلا</span> بپیوند!</h1>
     <p id="greet">نت آزاد و بدون دردسر؛ پلنتو انتخاب کن، بقیه‌شو بسپر به ما. کانفیگ‌هامون اختصاصیه و راحت وصل می‌شی.</p>
     <div class="chips">
+      <span class="chip on">آنلاینیم</span>
       <span class="chip"><svg class="ic"><use href="#i-zap"/></svg>تحویل سریع</span>
       <span class="chip"><svg class="ic"><use href="#i-lock"/></svg>اتصال امن</span>
       <span class="chip"><svg class="ic"><use href="#i-headset"/></svg>پشتیبانی مستقیم</span>
     </div>
   </section>
 
+  <div class="bnr rv">
+    <div class="bw" id="bw"></div>
+    <div class="bd" id="bd"></div>
+  </div>
+
   <div class="trust rv">
-    <div class="glass"><svg class="ic"><use href="#i-zap"/></svg><b>تحویل سریع</b><small>بعد از تأیید پرداخت</small></div>
+    <div class="glass"><svg class="ic"><use href="#i-rocket"/></svg><b>تحویل سریع</b><small>بعد از تأیید پرداخت</small></div>
     <div class="glass"><svg class="ic"><use href="#i-headset"/></svg><b>پشتیبانی</b><small>مستقیم تو پیوی</small></div>
-    <div class="glass"><svg class="ic"><use href="#i-lock"/></svg><b>امن و خصوصی</b><small>پروتکل‌های مدرن</small></div>
+    <div class="glass"><svg class="ic"><use href="#i-shield"/></svg><b>امن و خصوصی</b><small>پروتکل‌های مدرن</small></div>
   </div>
 
   <section id="plans">
-    <h2 class="sec rv">پلن‌های نامحدود</h2>
+    <h2 class="sec rv"><svg class="ic"><use href="#i-flask"/></svg>اول امتحان کن</h2>
+    <article class="plan glass test rv" id="p-test">
+      <span class="badge"><svg class="ic"><use href="#i-star"/></svg>رایگان</span>
+      <div class="ph">
+        <div class="pi"><svg class="ic"><use href="#i-timer"/></svg></div>
+        <div><h3>پلن تست ۲ دقیقه‌ای</h3><small>قبل از خرید امتحانش کن</small></div>
+        <div class="price"><b>رایگان</b><small>۲ دقیقه</small></div>
+      </div>
+      <ul class="feat">
+        <li><svg class="ic"><use href="#i-clock"/></svg>۲ دقیقه وقت داری کیفیت اتصال رو ببینی</li>
+        <li><svg class="ic"><use href="#i-activity"/></svg>پینگ و سرعتو خودت تست کن</li>
+        <li><svg class="ic"><use href="#i-headset"/></svg>کانفیگ تست رو ادمین تو پیوی برات فعال می‌کنه</li>
+      </ul>
+      <button class="btn" id="testbtn"><svg class="ic"><use href="#i-flask"/></svg>درخواست تست رایگان</button>
+    </article>
 
-    <article class="plan glass hot rv" id="p-gaming" data-plan="gaming">
-      <span class="badge">پیشنهاد گیمرها 🔥</span>
+    <h2 class="sec rv"><svg class="ic"><use href="#i-infinity"/></svg>پلن‌های نامحدود</h2>
+
+    <article class="plan glass hot rv" id="p-gaming">
+      <span class="badge"><svg class="ic"><use href="#i-flame"/></svg>پیشنهاد گیمرها</span>
       <div class="ph">
         <div class="pi"><svg class="ic"><use href="#i-game"/></svg></div>
         <div><h3>پلن GAMING</h3><small>نامحدود</small></div>
-        <div class="price"><b>۳۰۰,۰۰۰</b><small>تومان</small></div>
+        <div class="price"><b data-p="gaming"></b><small>تومان</small></div>
       </div>
-      <div class="proto"><span>WireGuard</span><span>AmneziaWG</span></div>
+      <div class="proto"><span><svg class="ic"><use href="#i-shield"/></svg>WireGuard</span><span><svg class="ic"><use href="#i-zap"/></svg>AmneziaWG</span></div>
       <ul class="feat">
-        <li>حجمش نامحدوده، هرچقدر خواستی بزن</li>
-        <li>مخصوص گیم آنلاین و تماس تصویری</li>
-        <li>اگه گیر کردی، آموزش و پشتیبانی هست</li>
+        <li><svg class="ic"><use href="#i-infinity"/></svg>حجمش نامحدوده، هرچقدر خواستی بزن</li>
+        <li><svg class="ic"><use href="#i-game"/></svg>مخصوص گیم آنلاین و تماس تصویری</li>
+        <li><svg class="ic"><use href="#i-headset"/></svg>اگه گیر کردی، آموزش و پشتیبانی هست</li>
       </ul>
-      <button class="btn" data-buy="gaming">می‌خوامش، پلن GAMING</button>
+      <div class="btns">
+        <button class="btn" data-buy="gaming"><svg class="ic"><use href="#i-bag"/></svg>خرید</button>
+        <button class="btn ghost" data-add="gaming"><svg class="ic"><use href="#i-cart"/></svg>به سبد</button>
+      </div>
     </article>
 
-    <article class="plan glass rv" id="p-vip" data-plan="vip">
+    <article class="plan glass rv" id="p-vip">
       <div class="ph">
         <div class="pi"><svg class="ic"><use href="#i-crown"/></svg></div>
         <div><h3>پلن VIP</h3><small>نامحدود</small></div>
-        <div class="price"><b>۲۰۰,۰۰۰</b><small>تومان</small></div>
+        <div class="price"><b data-p="vip"></b><small>تومان</small></div>
       </div>
-      <div class="proto"><span>WireGuard</span><span>OpenVPN</span></div>
+      <div class="proto"><span><svg class="ic"><use href="#i-shield"/></svg>WireGuard</span><span><svg class="ic"><use href="#i-lock"/></svg>OpenVPN</span></div>
       <ul class="feat">
-        <li>حجم نامحدود، بدون نگرانی</li>
-        <li>مناسب کار، وب‌گردی و شبکه‌های اجتماعی</li>
-        <li>اگه گیر کردی، آموزش و پشتیبانی هست</li>
+        <li><svg class="ic"><use href="#i-infinity"/></svg>حجم نامحدود، بدون نگرانی</li>
+        <li><svg class="ic"><use href="#i-globe"/></svg>مناسب کار، وب‌گردی و شبکه‌های اجتماعی</li>
+        <li><svg class="ic"><use href="#i-headset"/></svg>اگه گیر کردی، آموزش و پشتیبانی هست</li>
       </ul>
-      <button class="btn" data-buy="vip">می‌خوامش، پلن VIP</button>
+      <div class="btns">
+        <button class="btn" data-buy="vip"><svg class="ic"><use href="#i-bag"/></svg>خرید</button>
+        <button class="btn ghost" data-add="vip"><svg class="ic"><use href="#i-cart"/></svg>به سبد</button>
+      </div>
     </article>
 
-    <h2 class="sec rv" id="p-v2ray">پلن V2RAYNG حجمی</h2>
+    <h2 class="sec rv" id="p-v2ray"><svg class="ic"><use href="#i-database"/></svg>پلن V2RAYNG حجمی</h2>
     <div class="calc glass rv">
       <div class="ph" style="margin-bottom:18px">
         <div class="pi"><svg class="ic"><use href="#i-zap"/></svg></div>
@@ -313,36 +515,88 @@ footer b{color:var(--purple-2);font-weight:600}
       </div>
 
       <div class="row">
-        <div class="rl"><span>حجم <small>(هر گیگ ۳,۰۰۰ تومن)</small></span><b id="gbV">۲۰ گیگ</b></div>
-        <input type="range" id="gb" min="5" max="500" step="5" value="20">
+        <div class="rl"><span><svg class="ic"><use href="#i-database"/></svg>حجم <small>(هر گیگ <i data-p="gb" style="font-style:normal"></i> تومن)</small></span><b id="gbV">۲۰ گیگ</b></div>
+        <input type="range" id="gb" min="10" max="500" step="10" value="20">
       </div>
 
       <div class="row">
-        <div class="rl"><span>تعداد کاربر <small>(هر کاربر اضافه ۴۵,۰۰۰)</small></span></div>
+        <div class="rl"><span><svg class="ic"><use href="#i-users"/></svg>تعداد کاربر <small>(هر کاربر اضافه <i data-p="user" style="font-style:normal"></i>)</small></span></div>
         <div class="stepper">
-          <button data-s="u" data-d="1">+</button>
+          <button data-s="u" data-d="1" aria-label="بیشتر"><svg class="ic"><use href="#i-plus"/></svg></button>
           <div><span id="uV">۱ کاربر</span><em id="uE">کاربر پایه</em></div>
-          <button data-s="u" data-d="-1">−</button>
+          <button data-s="u" data-d="-1" aria-label="کمتر"><svg class="ic"><use href="#i-minus"/></svg></button>
         </div>
       </div>
 
       <div class="row">
-        <div class="rl"><span>مدت اشتراک <small>(هر ماه اضافه ۷۵,۰۰۰)</small></span></div>
+        <div class="rl"><span><svg class="ic"><use href="#i-calendar"/></svg>مدت اشتراک <small>(هر ماه اضافه <i data-p="month" style="font-style:normal"></i>)</small></span></div>
         <div class="stepper">
-          <button data-s="m" data-d="1">+</button>
+          <button data-s="m" data-d="1" aria-label="بیشتر"><svg class="ic"><use href="#i-plus"/></svg></button>
           <div><span id="mV">۱ ماه</span><em id="mE">ماه پایه</em></div>
-          <button data-s="m" data-d="-1">−</button>
+          <button data-s="m" data-d="-1" aria-label="کمتر"><svg class="ic"><use href="#i-minus"/></svg></button>
         </div>
       </div>
 
+      <div class="hint" id="hint"></div>
       <div class="break" id="break"></div>
-      <div class="total"><small>جمع کل</small><b id="tot">۶۰,۰۰۰<i>تومان</i></b></div>
-      <button class="btn" data-buy="v2ray">همینو می‌خوام</button>
+      <div class="total"><small>جمع کل</small><b id="tot">۰<i>تومان</i></b></div>
+      <div class="btns">
+        <button class="btn" data-buy="v2ray"><svg class="ic"><use href="#i-bag"/></svg>خرید</button>
+        <button class="btn ghost" data-add="v2ray"><svg class="ic"><use href="#i-cart"/></svg>به سبد</button>
+      </div>
+    </div>
+
+    <h2 class="sec rv" id="p-compare"><svg class="ic"><use href="#i-table"/></svg>مقایسه سریع پلن‌ها</h2>
+    <div class="cmp glass rv">
+      <table>
+        <thead><tr><th></th><th class="hl">GAMING</th><th>VIP</th><th>V2Ray</th></tr></thead>
+        <tbody>
+          <tr><td>قیمت</td><td class="hl"><b data-p="gaming"></b><small>تومان</small></td><td><b data-p="vip"></b><small>تومان</small></td><td><b data-p="gb"></b><small>هر گیگ</small></td></tr>
+          <tr><td>حجم</td><td class="hl">نامحدود</td><td>نامحدود</td><td>خودت انتخاب می‌کنی</td></tr>
+          <tr><td>پروتکل</td><td class="hl ltr">WireGuard<br>AmneziaWG</td><td class="ltr">WireGuard<br>OpenVPN</td><td class="ltr">V2Ray</td></tr>
+          <tr><td>مناسب</td><td class="hl">گیم و تماس تصویری</td><td>کار و وب‌گردی</td><td>مصرف کم یا متغیر</td></tr>
+          <tr><td></td><td class="hl"><button class="cb" data-buy="gaming">انتخاب</button></td><td><button class="cb" data-buy="vip">انتخاب</button></td><td><button class="cb" data-go="p-v2ray">تنظیم</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2 class="sec rv"><svg class="ic"><use href="#i-sliders"/></svg>ابزارهای هوشمند</h2>
+
+    <div class="tool glass rv" id="t-quiz">
+      <div class="ph" style="margin-bottom:12px"><div class="pi"><svg class="ic"><use href="#i-compass"/></svg></div><div><h3>پلن مناسب من کدومه؟</h3><small>۳ تا سؤال ساده</small></div></div>
+      <div id="qbox"></div>
+    </div>
+
+    <div class="tool glass rv" id="t-usage">
+      <div class="ph" style="margin-bottom:12px"><div class="pi"><svg class="ic"><use href="#i-calc"/></svg></div><div><h3>حجم مصرفی‌تو حساب کن</h3><small>ببین ماهی چقدر حجم لازم داری</small></div></div>
+      <div id="ubox"></div>
+      <div id="ures"></div>
+    </div>
+
+    <div class="tool glass rv" id="t-net">
+      <div class="ph" style="margin-bottom:12px"><div class="pi"><svg class="ic"><use href="#i-gauge"/></svg></div><div><h3>تست اتصال و IP</h3><small>اینترنت فعلی خودت</small></div></div>
+      <div class="tiles">
+        <div class="tile"><small><svg class="ic"><use href="#i-globe"/></svg>IP شما</small><b class="ltr" id="nIp">—</b></div>
+        <div class="tile"><small><svg class="ic"><use href="#i-pin"/></svg>موقعیت</small><b id="nCc">—</b></div>
+        <div class="tile"><small><svg class="ic"><use href="#i-activity"/></svg>پینگ</small><b id="nPing">—</b></div>
+        <div class="tile"><small><svg class="ic"><use href="#i-wifi"/></svg>سرعت دانلود</small><b class="ltr" id="nSpd">—</b></div>
+      </div>
+      <button class="btn" id="ntest"><svg class="ic"><use href="#i-gauge"/></svg>شروع تست</button>
+      <p class="prev" id="nprev">این تست مربوط به اینترنت خود شماست، نه سرعت سرورهای ما. یه بار قبل و یه بار بعد از وصل شدن به VPN بزن و نتیجه‌ها رو مقایسه کن.</p>
+    </div>
+
+    <div class="tool glass rv" id="t-ref">
+      <div class="ph" style="margin-bottom:12px"><div class="pi"><svg class="ic"><use href="#i-users"/></svg></div><div><h3>دعوت دوستان</h3><small>کد معرف مخصوص تو</small></div></div>
+      <p class="sub">کدتو به دوستات بده. دوستت موقع خرید تو کادر «کد تخفیف یا معرف» وارد می‌کنه و ۵ درصد تخفیف می‌گیره؛ تو هم ۵ درصد تخفیف می‌گیری. تخفیف تو رو ادمین بعد از خرید دوستت برات اعمال می‌کنه.</p>
+      <div class="code"><b id="mycode">—</b><button class="btn sm ghost" id="ccopy" style="width:auto;padding:10px 16px"><svg class="ic"><use href="#i-copy"/></svg>کپی</button></div>
+      <button class="btn" id="cshare"><svg class="ic"><use href="#i-share"/></svg>ارسال برای دوستان</button>
     </div>
   </section>
 
   <section id="guide">
-    <h2 class="sec rv">راهنمای اتصال</h2>
+    <h2 class="sec rv"><svg class="ic"><use href="#i-book"/></svg>راهنمای اتصال</h2>
     <div class="tabs glass rv" id="tabs">
       <button class="on" data-g="wg">WireGuard</button>
       <button data-g="awg">AmneziaWG</button>
@@ -351,36 +605,49 @@ footer b{color:var(--purple-2);font-weight:600}
     </div>
     <div class="guide glass rv" id="gbox"></div>
 
-    <h2 class="sec rv">خرید چطوریه؟</h2>
+    <div class="tool glass rv" id="t-cfg">
+      <div class="ph" style="margin-bottom:12px"><div class="pi"><svg class="ic"><use href="#i-link"/></svg></div><div><h3>لینک یا کانفیگ داری؟</h3><small>بچسبونش تا تو اپ باز بشه</small></div></div>
+      <textarea class="fld" id="cfg" placeholder="vless://... یا لینک اشتراک یا متن کانفیگ" spellcheck="false" autocomplete="off"></textarea>
+      <button class="btn ghost sm" id="cpaste"><svg class="ic"><use href="#i-copy"/></svg>چسباندن از کلیپ‌بورد</button>
+      <p class="priv">کانفیگ فقط داخل همین صفحه روی گوشی خودت بررسی می‌شه و جایی ارسال نمی‌شه.</p>
+      <div id="cres"></div>
+    </div>
+
+    <h2 class="sec rv"><svg class="ic"><use href="#i-cart"/></svg>خرید چطوریه؟</h2>
     <div class="buy glass rv">
-      <div class="step"><div class="n">۱</div><div><b>پلنتو انتخاب کن</b><small>یکی از پلن‌ها رو بزن یا حجم V2Ray رو دلخواه تنظیم کن.</small></div></div>
-      <div class="step"><div class="n">۲</div><div><b>سفارشو تأیید کن</b><small>خلاصه سفارش میاد؛ تأیید کنی می‌ری پیوی ادمین، پیام سفارش هم از قبل آماده‌ست.</small></div></div>
-      <div class="step"><div class="n">۳</div><div><b>پرداخت و دریافت کانفیگ</b><small>بعد از پرداخت، کانفیگ و آموزش وصل شدن همون‌جا تحویلت داده می‌شه.</small></div></div>
+      <div class="step"><div class="n"><svg class="ic"><use href="#i-bag"/></svg></div><div><b>پلنتو انتخاب کن</b><small>یکی از پلن‌ها رو به سبد اضافه کن یا حجم V2Ray رو دلخواه تنظیم کن. هرچند تا پلن خواستی می‌تونی بذاری تو سبد.</small></div></div>
+      <div class="step"><div class="n"><svg class="ic"><use href="#i-receipt"/></svg></div><div><b>سبدتو چک کن</b><small>تعداد رو تنظیم کن، کد تخفیف یا هدیه رو بزن و رسید ثبت سفارش بگیر. بعد تأیید کن تا بری پیوی ادمین؛ پیام سفارش آماده‌ست.</small></div></div>
+      <div class="step"><div class="n"><svg class="ic"><use href="#i-send"/></svg></div><div><b>پرداخت و دریافت کانفیگ</b><small>بعد از پرداخت، کانفیگ و آموزش وصل شدن همون‌جا تحویلت داده می‌شه.</small></div></div>
     </div>
   </section>
 
   <section id="support">
-    <h2 class="sec rv">سؤال‌های همیشگی</h2>
+    <h2 class="sec rv"><svg class="ic"><use href="#i-help"/></svg>سؤال‌های همیشگی</h2>
     <div class="faq glass rv" id="faq">
-      <div class="q"><button>کدوم پلن برای گیم بهتره؟</button><div>پلن GAMING با WireGuard و AmneziaWG مخصوص گیم آنلاین و تماس تصویریه. اگه بیشتر وب‌گردی و کار داری، VIP هم کفایت می‌کنه.</div></div>
-      <div class="q"><button>فرق نامحدود با حجمی چیه؟</button><div>تو GAMING و VIP محدودیت حجم نداری. تو V2RayNG حجم و مدت و تعداد کاربرو خودت انتخاب می‌کنی و همون قیمت حساب می‌شه.</div></div>
-      <div class="q"><button>پرداخت و تحویل چطوریه؟</button><div>سفارشو که تأیید کنی می‌ری پیوی ادمین. پرداخت و تحویل کانفیگ همون‌جا انجام می‌شه.</div></div>
-      <div class="q"><button>وصل نشدم، چیکار کنم؟</button><div>اول آموزش همین صفحه رو یه نگاه بنداز. اگه بازم نشد، تو پیوی پیام بده تا قدم‌به‌قدم کمکت کنیم.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-game"/></svg><span>کدوم پلن برای گیم بهتره؟</span></button><div>پلن GAMING با WireGuard و AmneziaWG مخصوص گیم آنلاین و تماس تصویریه. اگه بیشتر وب‌گردی و کار داری، VIP هم کفایت می‌کنه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-infinity"/></svg><span>فرق نامحدود با حجمی چیه؟</span></button><div>تو GAMING و VIP محدودیت حجم نداری. تو V2RayNG حجم و مدت و تعداد کاربرو خودت انتخاب می‌کنی و همون قیمت حساب می‌شه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-cart"/></svg><span>پرداخت و تحویل چطوریه؟</span></button><div>سبد خریدتو که تأیید کنی می‌ری پیوی ادمین. پرداخت و تحویل کانفیگ همون‌جا انجام می‌شه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-wifi"/></svg><span>وصل نشدم، چیکار کنم؟</span></button><div>اول آموزش همین صفحه رو یه نگاه بنداز. اگه بازم نشد، تو پیوی پیام بده تا قدم‌به‌قدم کمکت کنیم.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-gift"/></svg><span>کد تخفیف و هدیه دادن چطوریه؟</span></button><div>تو سبد خرید یه کادر برای کد تخفیف یا معرف هست. اگه اشتراک رو برای کسی می‌گیری، گزینه هدیه رو روشن کن و اسم یا آیدی تلگرامش رو بنویس تا ادمین کانفیگ رو برای اون بفرسته.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-timer"/></svg><span>پلن تست ۲ دقیقه‌ای چطوریه؟</span></button><div>رایگانه و برای امتحان کیفیت اتصاله. درخواستشو بفرست تا ادمین تو پیوی کانفیگ تستو برات فعال کنه؛ بعد از ۲ دقیقه خودش قطع می‌شه.</div></div>
     </div>
 
     <div class="support glass rv">
       <p>سؤالی داری یا مطمئن نیستی کدوم پلن به دردت می‌خوره؟<br>بیا پیوی، راحت حرف بزنیم.</p>
       <button class="btn ghost" id="contact"><svg class="ic"><use href="#i-chat"/></svg>حرف زدن با پشتیبانی</button>
     </div>
-    <footer><b>به جمع وصلا بپیوند!</b><br>Shadow VPN © ۲۰۲۶</footer>
+    <footer><b>به جمع وصلا بپیوند!</b><br>FerdosiVPN © ۲۰۲۶</footer>
   </section>
 </div>
+
+<button class="fab" id="fab"><svg class="ic"><use href="#i-cart"/></svg><span id="fabt"></span></button>
 
 <!-- floating nav -->
 <nav class="nav" id="nav">
   <button data-t="home" class="on"><svg class="ic"><use href="#i-home"/></svg><span>خانه</span></button>
   <button data-t="plans"><svg class="ic"><use href="#i-bag"/></svg><span>پلن‌ها</span></button>
   <button class="srch" id="navSearch" aria-label="جستجو"><svg class="ic"><use href="#i-search"/></svg></button>
+  <button data-t="tools"><svg class="ic"><use href="#i-sliders"/></svg><span>ابزارها</span></button>
   <button data-t="guide"><svg class="ic"><use href="#i-book"/></svg><span>راهنما</span></button>
   <button data-t="support"><svg class="ic"><use href="#i-chat"/></svg><span>پشتیبانی</span></button>
 </nav>
@@ -391,40 +658,94 @@ footer b{color:var(--purple-2);font-weight:600}
 <div class="sheet ssheet" id="ssheet">
   <div class="sinp">
     <svg class="ic"><use href="#i-search"/></svg>
-    <input id="sinp" type="search" placeholder="مثلاً: گیم، قیمت، آیفون، وایرگارد..." autocomplete="off">
+    <input id="sinp" type="search" placeholder="مثلاً: گیم، قیمت، تست، وایرگارد..." autocomplete="off">
     <button id="sclose" aria-label="بستن"><svg class="ic"><use href="#i-x"/></svg></button>
   </div>
   <div class="sres" id="sres"></div>
 </div>
 
-<!-- order -->
+<!-- cart -->
 <div class="sheet" id="sheet">
   <div class="grab"></div>
-  <h4>سفارشتو چک کن</h4>
-  <div class="sum" id="sum"></div>
-  <p class="note">دکمه پایین رو بزنی، پیام سفارش آماده می‌شه و پیوی ادمین باز می‌شه.<br>پرداخت و تحویل کانفیگ هم همون‌جاست.</p>
-  <button class="btn" id="go"><svg class="ic"><use href="#i-send"/></svg>برو پیوی ادمین</button>
+  <h4><svg class="ic"><use href="#i-cart"/></svg>سبد خرید</h4>
+
+  <div class="cempty" id="cempty">
+    <div class="pi"><svg class="ic"><use href="#i-cart"/></svg></div>
+    <p>سبدت خالیه. یه پلن انتخاب کن و بنداز تو سبد.</p>
+    <button class="btn" id="cgo"><svg class="ic"><use href="#i-bag"/></svg>برو به پلن‌ها</button>
+  </div>
+
+  <div class="cfull" id="cfull">
+    <div id="citems"></div>
+    <div class="sum" id="sum"></div>
+
+    <div class="sec2"><svg class="ic"><use href="#i-tag"/></svg>کد تخفیف یا کد معرف (اختیاری)</div>
+    <div class="inl">
+      <input class="fld" id="cin" placeholder="کد رو اینجا بنویس" autocapitalize="characters" autocomplete="off" spellcheck="false" style="direction:ltr;text-align:left">
+      <button class="btn" id="capply">ثبت</button>
+    </div>
+    <div class="msg" id="cmsg"></div>
+
+    <div class="sw" id="gsw"><span><svg class="ic"><use href="#i-gift"/></svg>این اشتراک هدیه‌ست</span><i></i></div>
+    <div class="gift" id="gbox2">
+      <input class="fld" id="gname" placeholder="اسم گیرنده" autocomplete="off">
+      <input class="fld" id="gid" placeholder="آیدی تلگرام گیرنده (اختیاری)" autocomplete="off" spellcheck="false" style="direction:ltr;text-align:left">
+      <input class="fld" id="gmsg" placeholder="پیام هدیه (اختیاری)" maxlength="100" autocomplete="off">
+      <button class="btn ghost sm" id="gshare"><svg class="ic"><use href="#i-share"/></svg>ارسال پیام هدیه به دوستم</button>
+    </div>
+
+    <p class="note">دکمه پایین رو بزنی، پیام سفارش آماده می‌شه و پیوی ادمین باز می‌شه.<br>پرداخت و تحویل کانفیگ هم همون‌جاست.</p>
+    <button class="btn" id="go"><svg class="ic"><use href="#i-send"/></svg>تأیید و رفتن به پیوی ادمین</button>
+    <button class="btn ghost" id="rcp" style="margin-top:8px"><svg class="ic"><use href="#i-receipt"/></svg>رسید ثبت سفارش</button>
+    <button class="clear" id="cclear"><svg class="ic"><use href="#i-trash"/></svg>خالی کردن سبد</button>
+  </div>
+</div>
+
+<!-- receipt -->
+<div class="sheet" id="rsheet">
+  <div class="grab"></div>
+  <h4><svg class="ic"><use href="#i-receipt"/></svg>رسید ثبت سفارش</h4>
+  <img id="rimg" alt="رسید سفارش" style="width:100%;border-radius:16px;border:1px solid var(--stroke);margin-bottom:12px">
+  <p class="note" style="margin-top:0">اگه ذخیره نشد، انگشتتو روی تصویر نگه دار و ذخیره رو بزن. این رسید فقط ثبت سفارشه و تأیید پرداخت نیست.</p>
+  <div class="btns" style="grid-template-columns:1fr 1fr">
+    <button class="btn ghost" id="rdl"><svg class="ic"><use href="#i-down"/></svg>ذخیره</button>
+    <button class="btn" id="rsh"><svg class="ic"><use href="#i-share"/></svg>اشتراک</button>
+  </div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
 (() => {
+  /* ================= تنظیمات ================= */
+  const PARTNER = false;          // نسخه همکاری؟
+  const P = {"gaming": 350000, "vip": 250000, "gb": 5000, "user": 75000, "month": 75000};                  // قیمت‌ها به تومان
+  const BRAND = "FerdosiVPN";
   const ADMIN = "shadowVPN_admin";
-  const PRICE = { gb: 3000, user: 45000, month: 75000 };
+  // لینک وب‌اپ داخل بات، مثلاً "https://t.me/YourBot/app". اگه خالی باشه فقط کد معرف ارسال می‌شه.
+  const BOT_APP_LINK = "";
+  // کدهای تخفیف (سمت کاربر چک می‌شن؛ ادمین موقع پرداخت باید دوباره تأییدشون کنه).
+  const CODES = { FERDOSI10: { percent: 10, label: "۱۰ درصد تخفیف" } };
+  const REF_PERCENT = 5;                 // تخفیف کد معرف (برای دوست و معرف)
+  const MAXQ = 10;                       // حداکثر تعداد هر مورد در سبد
+  /* ========================================== */
+
   const PLANS = {
-    gaming: { name: "GAMING نامحدود", icon: "🎮", price: 300000, proto: "WireGuard و AmneziaWG", vol: "نامحدود" },
-    vip:    { name: "VIP نامحدود",    icon: "👑", price: 200000, proto: "WireGuard و OpenVPN",   vol: "نامحدود" }
+    gaming: { name: "GAMING نامحدود", icon: "game", proto: "WireGuard و AmneziaWG" },
+    vip:    { name: "VIP نامحدود",    icon: "crown", proto: "WireGuard و OpenVPN" }
   };
 
   const tg = window.Telegram && Telegram.WebApp;
+  let uid = 0, ufirst = "", startParam = "";
   if (tg) {
     try {
       tg.ready(); tg.expand();
-      tg.setHeaderColor("#07060b"); tg.setBackgroundColor("#07060b");
+      tg.setHeaderColor("#0a0905"); tg.setBackgroundColor("#0a0905");
       tg.disableVerticalSwipes && tg.disableVerticalSwipes();
       const u = tg.initDataUnsafe && tg.initDataUnsafe.user;
-      if (u && u.first_name) document.getElementById("greet").textContent =
-        "سلام " + u.first_name + " 👋 خوش اومدی! پلنتو انتخاب کن، بقیه‌شو بسپر به ما؛ کانفیگ‌ها اختصاصیه و راحت وصل می‌شی.";
+      if (u) { uid = u.id || 0; ufirst = u.first_name || ""; }
+      startParam = (tg.initDataUnsafe && tg.initDataUnsafe.start_param) || "";
+      if (ufirst) document.getElementById("greet").textContent =
+        "سلام " + ufirst + " خوش اومدی! پلنتو انتخاب کن، بقیه‌شو بسپر به ما؛ کانفیگ‌ها اختصاصیه و راحت وصل می‌شی.";
     } catch (e) {}
   }
   const haptic = (t = "light") => { try { tg.HapticFeedback.impactOccurred(t); } catch (e) {} };
@@ -432,15 +753,83 @@ footer b{color:var(--purple-2);font-weight:600}
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const fa = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
-  const money = n => fa(n.toLocaleString("en-US"));
-  const toast = t => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); setTimeout(() => el.classList.remove("on"), 2200); };
+  const fh = n => fa(n).replace(".", "٫");
+  const money = n => fa(Number(n).toLocaleString("en-US"));
+  const enc = encodeURIComponent;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const ico = id => `<svg class="ic"><use href="#i-${id}"/></svg>`;
+  let toastT;
+  const toast = t => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("on"), 2600); };
+  async function copy(t) {
+    try { await navigator.clipboard.writeText(t); return true; }
+    catch (e) {
+      try { const a = document.createElement("textarea"); a.value = t; a.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(a); a.select(); const ok = document.execCommand("copy"); a.remove(); return ok; }
+      catch (e2) { return false; }
+    }
+  }
+  function saveText(name, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
+    const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+  function openTg(url) {
+    try { if (tg && tg.openTelegramLink) { tg.openTelegramLink(url); return; } } catch (e) {}
+    window.open(url, "_blank");
+  }
+  const openAdmin = text => openTg("https://t.me/" + ADMIN + (text ? "?text=" + enc(text) : ""));
+  const verTag = () => BRAND + (PARTNER ? " - نسخه همکاری" : "");
 
-  /* ---------- calculator ---------- */
+  if (PARTNER) $("#pbadge").hidden = false;
+  $$("[data-p]").forEach(el => el.textContent = money(P[el.dataset.p]));
+
+  /* ---------- sheets ---------- */
+  const anyOn = () => $$(".sheet.on").length > 0;
+  const show = id => { $("#" + id).classList.add("on"); $("#ov").classList.add("on"); };
+  const hide = id => { $("#" + id).classList.remove("on"); if (!anyOn()) $("#ov").classList.remove("on"); };
+  const hideAll = () => { $$(".sheet.on").forEach(s => s.classList.remove("on")); $("#ov").classList.remove("on"); $("#sinp").blur(); };
+  $("#ov").addEventListener("click", hideAll);
+
+  /* ---------- navigation ---------- */
+  const go = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); };
+  document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) { haptic(); go(b.dataset.go); } });
+  $$("#nav [data-t]").forEach(b => b.addEventListener("click", () => { haptic(); go(b.dataset.t); }));
+  const secs = ["home", "plans", "tools", "guide", "support"].map(id => document.getElementById(id));
+  function spy() {
+    let cur = "home";
+    const y = window.innerHeight * 0.4;
+    secs.forEach(s => { if (s.getBoundingClientRect().top <= y) cur = s.id; });
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 8) cur = "support";
+    $$("#nav [data-t]").forEach(b => b.classList.toggle("on", b.dataset.t === cur));
+  }
+  window.addEventListener("scroll", spy, { passive: true }); spy();
+
+  /* ---------- promo banner ---------- */
+  const SLIDES = [
+    { i: "game", tg: "پیشنهاد گیمرها", ti: "flame", t: "پلن GAMING", s: "پروتکل‌های WireGuard و AmneziaWG برای گیم و تماس تصویری", pr: money(P.gaming), un: "تومان", g: "p-gaming" },
+    { i: "crown", tg: "نامحدود", ti: "infinity", t: "پلن VIP", s: "پروتکل‌های WireGuard و OpenVPN برای کار و وب‌گردی", pr: money(P.vip), un: "تومان", g: "p-vip" },
+    { i: "zap", tg: "حجمی", ti: "database", t: "V2RayNG حجمی", s: "حجم، کاربر و مدتو خودت انتخاب کن و فقط همونو بپرداز", pr: money(P.gb), un: "تومان برای هر گیگ", g: "p-v2ray" },
+    { i: "flask", tg: "رایگان", ti: "star", t: "تست ۲ دقیقه‌ای", s: "قبل از خرید، کیفیت اتصالو خودت امتحان کن", pr: "رایگان", un: "", g: "p-test" }
+  ];
+  const bw = $("#bw");
+  bw.innerHTML = SLIDES.map(s => `<div class="bsw"><div class="bs" data-go="${s.g}"><div class="bi">${ico(s.i)}</div><span class="bt">${ico(s.ti)}${s.tg}</span><h3>${s.t}</h3><p>${s.s}</p><div class="bp"><strong>${s.pr}</strong><em>${s.un}</em></div><span class="bc">ببین${ico("chevl")}</span></div></div>`).join("");
+  $("#bd").innerHTML = SLIDES.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("");
+  let bi = 0, btouch = 0;
+  function bGo(i) {
+    const w = bw.clientWidth, dir = getComputedStyle(bw).direction === "rtl" ? -1 : 1;
+    bw.scrollTo({ left: dir * i * w, behavior: "smooth" });
+  }
+  bw.addEventListener("scroll", () => {
+    const i = Math.round(Math.abs(bw.scrollLeft) / (bw.clientWidth || 1));
+    if (i !== bi && i >= 0 && i < SLIDES.length) { bi = i; $$("#bd i").forEach((d, k) => d.classList.toggle("on", k === i)); }
+  }, { passive: true });
+  ["touchstart", "pointerdown", "wheel"].forEach(ev => bw.addEventListener(ev, () => { btouch = Date.now(); }, { passive: true }));
+  setInterval(() => { if (document.hidden || Date.now() - btouch < 9000) return; bGo((bi + 1) % SLIDES.length); }, 5000);
+
+  /* ---------- V2Ray calculator ---------- */
   const st = { gb: 20, users: 1, months: 1 };
   const gbEl = $("#gb");
   function calc() {
-    const g = st.gb * PRICE.gb, u = (st.users - 1) * PRICE.user, m = (st.months - 1) * PRICE.month;
+    const g = st.gb * P.gb, u = (st.users - 1) * P.user, m = (st.months - 1) * P.month;
     return { g, u, m, total: g + u + m };
   }
   function renderCalc() {
@@ -455,7 +844,15 @@ footer b{color:var(--purple-2);font-weight:600}
     if (c.u) b += " • کاربر اضافه: " + money(c.u) + " ت";
     if (c.m) b += " • ماه اضافه: " + money(c.m) + " ت";
     $("#break").textContent = b;
-    gbEl.style.setProperty("--p", ((st.gb - 5) / 495 * 100) + "%");
+    gbEl.value = st.gb;
+    gbEl.style.setProperty("--p", ((st.gb - 10) / 490 * 100) + "%");
+    const h = $("#hint");
+    if (st.users === 1 && st.months === 1) {
+      h.innerHTML = c.total >= P.vip
+        ? `${ico("info")}<span>با این مبلغ، پلن VIP نامحدود (${money(P.vip)} تومان) به‌صرفه‌تره و حجم هم نداره. <button data-go="p-vip">ببینمش</button></span>`
+        : `${ico("info")}<span>با این حجم، حجمی از پلن VIP نامحدود (${money(P.vip)} تومان) ارزون‌تر درمیاد.</span>`;
+      h.classList.add("on");
+    } else h.classList.remove("on");
   }
   gbEl.addEventListener("input", () => { st.gb = +gbEl.value; renderCalc(); });
   gbEl.addEventListener("change", () => haptic());
@@ -466,100 +863,461 @@ footer b{color:var(--purple-2);font-weight:600}
   }));
   renderCalc();
 
-  /* ---------- order ---------- */
-  let order = null;
-  function buildOrder(key) {
-    if (key === "v2ray") {
-      const c = calc();
+  /* ---------- cart ---------- */
+  const CK = "fv_cart_" + (PARTNER ? "p" : "m");
+  const validItem = it => it && (it.k === "gaming" || it.k === "vip" || it.k === "v2ray") &&
+    Number.isInteger(it.qty) && it.qty >= 1 && it.qty <= MAXQ &&
+    (it.k !== "v2ray" || (Number.isInteger(it.gb) && it.gb >= 10 && it.gb <= 500 && Number.isInteger(it.users) && it.users >= 1 && it.users <= 20 && Number.isInteger(it.months) && it.months >= 1 && it.months <= 12));
+  let cart = [];
+  try { const raw = JSON.parse(localStorage.getItem(CK) || "[]"); if (Array.isArray(raw)) cart = raw.filter(validItem); } catch (e) {}
+  const saveCart = () => { try { localStorage.setItem(CK, JSON.stringify(cart)); } catch (e) {} };
+  const itemId = it => it.k === "v2ray" ? "v2ray|" + it.gb + "|" + it.users + "|" + it.months : it.k;
+  function info(it) {
+    if (it.k === "v2ray") {
       return {
-        title: "V2RayNG حجمی",
-        rows: [["حجم", fa(st.gb) + " گیگ"], ["تعداد کاربر", fa(st.users)], ["مدت", fa(st.months) + " ماه"]],
-        total: c.total,
-        text: `سلام 👋\nمی‌خوام این پلنو بخرم (از وب‌اپ):\n\n⚡ V2RayNG حجمی\n• حجم: ${st.gb} گیگ\n• کاربر: ${st.users}\n• مدت: ${st.months} ماه\n💰 مبلغ: ${c.total.toLocaleString("en-US")} تومان`
+        title: "V2RayNG حجمی", icon: "zap",
+        unit: it.gb * P.gb + (it.users - 1) * P.user + (it.months - 1) * P.month,
+        sub: fa(it.gb) + " گیگ • " + fa(it.users) + " کاربر • " + fa(it.months) + " ماه",
+        lines: ["حجم: " + it.gb + " گیگ", "کاربر: " + it.users, "مدت: " + it.months + " ماه"]
       };
     }
-    const p = PLANS[key];
-    return {
-      title: "پلن " + p.name,
-      rows: [["پروتکل‌ها", p.proto], ["حجم", p.vol]],
-      total: p.price,
-      text: `سلام 👋\nمی‌خوام این پلنو بخرم (از وب‌اپ):\n\n${p.icon} پلن ${p.name}\n• پروتکل: ${p.proto}\n💰 مبلغ: ${p.price.toLocaleString("en-US")} تومان`
-    };
+    const p = PLANS[it.k];
+    return { title: "پلن " + p.name, icon: p.icon, unit: P[it.k], sub: p.proto + " • حجم نامحدود", lines: ["پروتکل: " + p.proto, "حجم: نامحدود"] };
   }
-  function openSheet(key) {
-    order = buildOrder(key);
-    $("#sum").innerHTML =
-      `<div><span>پلن</span><b>${order.title}</b></div>` +
-      order.rows.map(r => `<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("") +
-      `<div class="t"><span>مبلغ قابل پرداخت</span><b>${money(order.total)} تومان</b></div>`;
-    closeSearch(true);
-    $("#ov").classList.add("on"); $("#sheet").classList.add("on"); haptic("medium");
-  }
-  function closeSheet() { $("#sheet").classList.remove("on"); if (!$("#ssheet").classList.contains("on")) $("#ov").classList.remove("on"); }
-  $$("[data-buy]").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); openSheet(b.dataset.buy); }));
-  $$(".plan").forEach(p => p.addEventListener("click", () => openSheet(p.dataset.plan)));
 
-  function openAdmin(text) {
-    const url = "https://t.me/" + ADMIN + (text ? "?text=" + encodeURIComponent(text) : "");
-    try { if (tg && tg.openTelegramLink) { tg.openTelegramLink(url); return; } } catch (e) {}
-    window.open(url, "_blank");
+  const myCode = (() => {
+    if (uid) return "FV" + Number(uid).toString(36).toUpperCase();
+    let c = ""; try { c = localStorage.getItem("fv_code") || ""; } catch (e) {}
+    if (!c) { c = "FV" + Math.random().toString(36).slice(2, 8).toUpperCase(); try { localStorage.setItem("fv_code", c); } catch (e) {} }
+    return c;
+  })();
+  const REF_RE = /^FV[0-9A-Z]{4,12}$/;
+  let orderId = "", disc = null, ref = "";
+  let pending = /^ref_/i.test(startParam) ? startParam.slice(4).toUpperCase() : "";
+  const gift = { on: false, name: "", id: "", msg: "" };
+  const genId = () => "FV-" + Array.from({ length: 6 }, () => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[Math.floor(Math.random() * 32)]).join("");
+
+  function totals() {
+    const sub = cart.reduce((s, it) => s + info(it).unit * it.qty, 0);
+    const off = disc ? Math.round(sub * disc.percent / 100 / 1000) * 1000 : 0;
+    return { sub, off, total: sub - off, count: cart.reduce((s, it) => s + it.qty, 0) };
+  }
+  function renderBadges() {
+    const T = totals();
+    const h = $("#hcnt"); h.textContent = fa(T.count); h.classList.toggle("on", T.count > 0);
+    $("#fabt").textContent = "سبد خرید • " + fa(T.count) + " مورد • " + money(T.sub) + " تومان";
+    $("#fab").classList.toggle("on", T.count > 0 && !anyOn());
+  }
+  const specFor = k => k === "v2ray" ? { k, gb: st.gb, users: st.users, months: st.months } : { k };
+  function addItem(spec, openAfter) {
+    const id = itemId(spec), ex = cart.find(x => itemId(x) === id);
+    if (ex) { if (ex.qty >= MAXQ) toast("از هر مورد حداکثر " + fa(MAXQ) + " عدد"); else ex.qty++; }
+    else cart.push({ ...spec, qty: 1 });
+    saveCart(); renderBadges(); haptic("medium");
+    if (openAfter) openCart(); else toast("به سبد خرید اضافه شد");
+  }
+  $$("[data-add]").forEach(b => b.addEventListener("click", () => addItem(specFor(b.dataset.add), false)));
+  $$("[data-buy]").forEach(b => b.addEventListener("click", () => addItem(specFor(b.dataset.buy), true)));
+
+  function renderSummary() {
+    const T = totals();
+    let h = `<div><span>جمع اقلام (${fa(T.count)} مورد)</span><b>${money(T.sub)} تومان</b></div>`;
+    if (disc) h += `<div><span>تخفیف (${esc(disc.code)})</span><b>${money(T.off)} تومان</b></div>`;
+    if (ref) h += `<div><span>کد معرف</span><b style="direction:ltr">${esc(ref)}</b></div>`;
+    if (gift.on && gift.name) h += `<div><span>هدیه برای</span><b>${esc(gift.name)}</b></div>`;
+    h += `<div class="t"><span>مبلغ قابل پرداخت</span><b>${money(T.total)} تومان</b></div>`;
+    $("#sum").innerHTML = h;
+  }
+  function renderCart() {
+    const empty = cart.length === 0;
+    $("#cempty").style.display = empty ? "block" : "none";
+    $("#cfull").style.display = empty ? "none" : "block";
+    if (empty) return;
+    $("#citems").innerHTML = cart.map(it => {
+      const f = info(it), id = esc(itemId(it));
+      return `<div class="ci"><div class="pi">${ico(f.icon)}</div><div class="cm"><b>${f.title}</b><small>${f.sub}</small></div>` +
+        `<div class="ca"><div class="cq"><button data-a="inc" data-id="${id}" aria-label="بیشتر">${ico("plus")}</button><span>${fa(it.qty)}</span><button data-a="dec" data-id="${id}" aria-label="کمتر">${ico("minus")}</button></div>` +
+        `<span class="cp">${money(f.unit * it.qty)} تومان</span><button class="cx" data-a="del" data-id="${id}" aria-label="حذف">${ico("trash")}</button></div></div>`;
+    }).join("");
+    renderSummary();
+  }
+  $("#citems").addEventListener("click", e => {
+    const b = e.target.closest("[data-a]"); if (!b) return;
+    const it = cart.find(x => itemId(x) === b.dataset.id); if (!it) return;
+    const a = b.dataset.a;
+    if (a === "inc") { if (it.qty < MAXQ) it.qty++; else toast("از هر مورد حداکثر " + fa(MAXQ) + " عدد"); }
+    else if (a === "dec") { it.qty--; if (it.qty < 1) cart = cart.filter(x => x !== it); }
+    else cart = cart.filter(x => x !== it);
+    haptic(); afterCartChange();
+  });
+  function resetOrder() {
+    disc = null; ref = ""; orderId = ""; gift.on = false; gift.name = gift.id = gift.msg = "";
+    ["#cin", "#gname", "#gid", "#gmsg"].forEach(s => $(s).value = "");
+    $("#gsw").classList.remove("on"); $("#gbox2").classList.remove("on"); setMsg("");
+  }
+  function afterCartChange() {
+    if (!cart.length) resetOrder();
+    saveCart(); renderBadges(); renderCart();
+  }
+  $("#cclear").addEventListener("click", () => { cart = []; haptic(); afterCartChange(); });
+  $("#cgo").addEventListener("click", () => { hide("sheet"); setTimeout(() => go("plans"), 200); });
+  $("#hcart").addEventListener("click", () => { haptic(); openCart(); });
+  $("#fab").addEventListener("click", () => { haptic(); openCart(); });
+
+  function setMsg(t, k) { const m = $("#cmsg"); m.textContent = t; m.className = "msg" + (k ? " " + k : ""); }
+  function applyCode() {
+    const v = $("#cin").value.trim().toUpperCase();
+    disc = null; ref = "";
+    if (!v) setMsg("");
+    else if (CODES[v]) { disc = { code: v, ...CODES[v] }; setMsg("کد تخفیف اعمال شد: " + disc.label, "ok"); }
+    else if (REF_RE.test(v)) {
+      if (v === myCode) setMsg("کد معرف خودتو نمی‌تونی بزنی.", "er");
+      else { ref = v; disc = { code: v, percent: REF_PERCENT, label: fa(REF_PERCENT) + " درصد تخفیف معرف" }; setMsg("کد معرف ثبت شد و " + fa(REF_PERCENT) + " درصد تخفیف گرفتی.", "ok"); }
+    } else setMsg("این کد معتبر نیست.", "er");
+    renderSummary(); renderBadges(); haptic();
+  }
+  $("#capply").addEventListener("click", applyCode);
+  $("#cin").addEventListener("keydown", e => { if (e.key === "Enter") applyCode(); });
+
+  function setGift(on) { gift.on = on; $("#gsw").classList.toggle("on", on); $("#gbox2").classList.toggle("on", on); renderSummary(); }
+  $("#gsw").addEventListener("click", () => { haptic(); setGift(!gift.on); });
+  [["#gname", "name"], ["#gid", "id"], ["#gmsg", "msg"]].forEach(([s, k]) => $(s).addEventListener("input", e => { gift[k] = e.target.value.trim(); renderSummary(); }));
+  $("#gshare").addEventListener("click", () => {
+    const link = BOT_APP_LINK || "https://t.me/" + ADMIN;
+    const t = `سلام ${gift.name}\nیه اشتراک ${BRAND} برات هدیه گرفتم!` + (gift.msg ? "\n" + gift.msg : "") + `\nبعد از پرداخت، کانفیگ از طرف ادمین برات فرستاده می‌شه.`;
+    openTg("https://t.me/share/url?url=" + enc(link) + "&text=" + enc(t.trim()));
+  });
+
+  function orderText() {
+    const T = totals();
+    const L = ["سلام", "می‌خوام این سفارشو ثبت کنم (از وب‌اپ " + verTag() + "):", ""];
+    cart.forEach((it, i) => {
+      const f = info(it);
+      L.push((i + 1) + ") " + f.title + " × " + it.qty + " = " + (f.unit * it.qty).toLocaleString("en-US") + " تومان");
+      f.lines.forEach(x => L.push("   • " + x));
+    });
+    L.push("");
+    if (disc && !ref) L.push("کد تخفیف: " + disc.code + " (" + disc.label + ")");
+    if (ref) L.push("کد معرف: " + ref + " (" + disc.label + ")");
+    if (gift.on) {
+      L.push("این سفارش هدیه‌ست:");
+      if (gift.name) L.push("• گیرنده: " + gift.name);
+      if (gift.id) L.push("• آیدی تلگرام گیرنده: " + gift.id);
+      if (gift.msg) L.push("• پیام هدیه: " + gift.msg);
+    }
+    L.push("", "مبلغ نهایی: " + T.total.toLocaleString("en-US") + " تومان", "شماره سفارش: " + orderId);
+    return L.join("\n");
+  }
+  function openCart() {
+    hide("ssheet"); $("#toast").classList.remove("on");
+    if (cart.length && !orderId) orderId = genId();
+    if (pending && cart.length) { $("#cin").value = pending; pending = ""; applyCode(); }
+    renderCart(); show("sheet"); renderBadges();
   }
   $("#go").addEventListener("click", () => {
+    if (!cart.length) return;
     haptic("medium");
-    try { navigator.clipboard && navigator.clipboard.writeText(order.text); } catch (e) {}
-    closeSheet(); openAdmin(order.text);
+    const t = orderText();
+    copy(t); hide("sheet"); openAdmin(t); renderBadges();
   });
   $("#contact").addEventListener("click", () => { haptic(); openAdmin(""); });
+  $("#testbtn").addEventListener("click", () => {
+    haptic("medium");
+    openAdmin("سلام\nمی‌خوام پلن تست ۲ دقیقه‌ای رو امتحان کنم (از وب‌اپ " + verTag() + ")");
+  });
+  // وقتی شیت‌ها بسته/باز می‌شن دکمه شناور سبد هم به‌روز بشه
+  new MutationObserver(renderBadges).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["class"] });
+  renderBadges();
+
+  /* ---------- receipt ---------- */
+  let rcv = null;
+  function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+  async function makeReceipt() {
+    try { await document.fonts.load("700 30px Vazirmatn"); await document.fonts.load("400 24px Vazirmatn"); } catch (e) {}
+    const T = totals();
+    let date = "";
+    try { date = new Intl.DateTimeFormat("fa-IR-u-ca-persian", { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date()); } catch (e) { date = new Date().toLocaleString("fa-IR"); }
+    const rows = [{ l: "شماره سفارش", v: orderId }, { l: "تاریخ ثبت", v: date }];
+    if (PARTNER) rows.push({ l: "نسخه", v: "همکاری" });
+    cart.forEach(it => { const f = info(it); rows.push({ l: f.title + (it.qty > 1 ? " × " + fa(it.qty) : ""), v: money(f.unit * it.qty) + " تومان", sub: f.sub }); });
+    if (disc) rows.push({ l: "تخفیف (" + disc.code + ")", v: money(T.off) + " تومان" });
+    if (ref) rows.push({ l: "کد معرف", v: ref });
+    if (gift.on) rows.push({ l: "هدیه برای", v: gift.name || "—" });
+    const rh = r => r.sub ? 124 : 86;
+    const bodyH = rows.reduce((s, r) => s + rh(r), 0);
+    const top = 290, W = 900, H = top + bodyH + 20 + 110 + 330;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const c = cv.getContext("2d");
+    const F = "Vazirmatn, system-ui, sans-serif";
+    let g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#0a0905"); g.addColorStop(1, "#231a05");
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    g = c.createRadialGradient(W - 100, 60, 10, W - 100, 60, 420); g.addColorStop(0, "rgba(250,204,21,.45)"); g.addColorStop(1, "rgba(250,204,21,0)");
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    g = c.createRadialGradient(80, H - 80, 10, 80, H - 80, 380); g.addColorStop(0, "rgba(161,98,7,.5)"); g.addColorStop(1, "rgba(161,98,7,0)");
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    rr(c, 40, 40, W - 80, H - 80, 44); c.fillStyle = "rgba(255,255,255,.05)"; c.fill(); c.strokeStyle = "rgba(255,255,255,.16)"; c.lineWidth = 2; c.stroke();
+
+    c.direction = "rtl";
+    g = c.createLinearGradient(W - 160, 80, W - 70, 170); g.addColorStop(0, "#fde047"); g.addColorStop(1, "#ca8a04");
+    rr(c, W - 160, 80, 90, 90, 28); c.fillStyle = g; c.fill();
+    c.strokeStyle = "#171203"; c.lineWidth = 6; c.lineCap = "round"; c.lineJoin = "round";
+    c.beginPath(); c.moveTo(W - 115, 102); c.lineTo(W - 90, 112); c.lineTo(W - 90, 132); c.quadraticCurveTo(W - 90, 150, W - 115, 158); c.quadraticCurveTo(W - 140, 150, W - 140, 132); c.lineTo(W - 140, 112); c.closePath(); c.stroke();
+    c.textAlign = "right"; c.textBaseline = "alphabetic";
+    c.fillStyle = "#fff"; c.font = `800 46px ${F}`; c.fillText("رسید ثبت سفارش", W - 185, 122);
+    c.fillStyle = "#fde047"; c.font = `500 26px ${F}`; c.fillText(BRAND + (PARTNER ? "  |  نسخه همکاری" : ""), W - 185, 166);
+    c.setLineDash([10, 10]); c.strokeStyle = "rgba(255,255,255,.18)"; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(100, 230); c.lineTo(W - 100, 230); c.stroke();
+
+    let y = top;
+    rows.forEach(r => {
+      c.setLineDash([]);
+      c.fillStyle = "#a8a28c"; c.textAlign = "right"; c.font = `400 27px ${F}`; c.fillText(r.l, W - 100, y + 50);
+      c.fillStyle = "#f8f5ea"; c.textAlign = "left"; c.font = `600 28px ${F}`; c.fillText(r.v, 100, y + 50);
+      if (r.sub) { c.fillStyle = "#85806a"; c.textAlign = "right"; c.font = `400 22px ${F}`; c.fillText(r.sub, W - 100, y + 88); }
+      const h = rh(r);
+      c.setLineDash([8, 8]); c.strokeStyle = "rgba(255,255,255,.1)"; c.beginPath(); c.moveTo(100, y + h - 6); c.lineTo(W - 100, y + h - 6); c.stroke();
+      y += h;
+    });
+    c.setLineDash([]);
+    const ty = y + 20;
+    g = c.createLinearGradient(100, ty, W - 100, ty + 110); g.addColorStop(0, "rgba(250,204,21,.5)"); g.addColorStop(1, "rgba(202,138,4,.22)");
+    rr(c, 100, ty, W - 200, 110, 30); c.fillStyle = g; c.fill(); c.strokeStyle = "rgba(253,224,71,.6)"; c.lineWidth = 2; c.stroke();
+    c.fillStyle = "#fff3bf"; c.textAlign = "right"; c.font = `500 28px ${F}`; c.fillText("مبلغ قابل پرداخت", W - 140, ty + 66);
+    c.fillStyle = "#fff"; c.textAlign = "left"; c.font = `800 38px ${F}`; c.fillText(money(T.total) + " تومان", 140, ty + 68);
+
+    c.textAlign = "center"; c.fillStyle = "#a8a28c"; c.font = `400 22px ${F}`;
+    c.fillText("این رسید فقط ثبت سفارش رو نشون می‌ده", W / 2, ty + 190);
+    c.fillText("و به‌منزله تأیید پرداخت نیست.", W / 2, ty + 224);
+    c.fillStyle = "#fde047"; c.font = `700 32px ${F}`; c.fillText("به جمع وصلا بپیوند!", W / 2, ty + 290);
+    c.fillStyle = "#85806a"; c.font = `400 24px ${F}`; c.fillText("@" + ADMIN, W / 2, ty + 332);
+    rcv = cv;
+    return cv.toDataURL("image/png");
+  }
+  $("#rcp").addEventListener("click", async () => {
+    if (!cart.length) return;
+    haptic();
+    $("#rimg").src = await makeReceipt();
+    show("rsheet");
+  });
+  $("#rdl").addEventListener("click", () => {
+    if (!rcv) return;
+    const a = document.createElement("a"); a.href = rcv.toDataURL("image/png"); a.download = "ferdosivpn-" + orderId + ".png";
+    document.body.appendChild(a); a.click(); a.remove();
+    toast("اگه ذخیره نشد، انگشتتو روی تصویر نگه دار");
+  });
+  $("#rsh").addEventListener("click", async () => {
+    if (!rcv) return;
+    try {
+      const blob = await new Promise(r => rcv.toBlob(r, "image/png"));
+      const f = new File([blob], "ferdosivpn-" + orderId + ".png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: "رسید سفارش " + BRAND }); return; }
+    } catch (e) { if (e && e.name === "AbortError") return; }
+    toast("اشتراک مستقیم اینجا پشتیبانی نمی‌شه؛ انگشتتو روی تصویر نگه دار");
+  });
+
+  /* ---------- quiz ---------- */
+  const QZ = [
+    { q: "بیشتر برای چی ازش استفاده می‌کنی؟", o: [["گیم آنلاین", "game"], ["وب‌گردی، شبکه اجتماعی و کار", "web"], ["ویدیو و دانلود", "video"], ["گیم و بقیه چیزها", "mix"]] },
+    { q: "ماهی چقدر حجم مصرف می‌کنی؟", o: [["کم (زیر ۳۰ گیگ)", "low"], ["متوسط (۳۰ تا ۸۰ گیگ)", "mid"], ["زیاد (بیشتر از ۸۰ گیگ)", "high"], ["نمی‌دونم", "unk"]] },
+    { q: "چند نفر قراره استفاده کنن؟", o: [["فقط خودم", "1"], ["۲ یا ۳ نفر", "3"], ["بیشتر از ۳ نفر", "4"]] }
+  ];
+  let qa = [], qi = 0;
+  function recommend([use, vol, users]) {
+    const gbs = { low: 20, mid: 60, high: 120, unk: 60 }[vol];
+    const n = users === "1" ? 1 : users === "3" ? 3 : 4;
+    const v2 = (gb, u) => gb * P.gb + (u - 1) * P.user;
+    const be = Math.ceil(P.vip / P.gb);
+    if (n > 1) {
+      return { spec: { k: "v2ray", gb: gbs, users: n, months: 1 }, price: v2(gbs, n), title: "V2RayNG حجمی",
+        text: `برای ${fa(n)} کاربر، پلن حجمی شفاف‌ترینه چون تعداد کاربر رو خودت مشخص می‌کنی. پیشنهادم ${fa(gbs)} گیگ برای یک ماه؛ تو ماشین‌حساب بالا می‌تونی دقیق‌ترش کنی. برای چندکاربره بودن پلن‌های نامحدود از ادمین بپرس.` };
+    }
+    if (use === "game" || use === "mix") {
+      return { spec: { k: "gaming" }, price: P.gaming, title: "پلن GAMING نامحدود", text: "پروتکل‌های WireGuard و AmneziaWG این پلن برای گیم و تماس تصویری انتخاب شدن و حجمش هم نامحدوده." };
+    }
+    const c = v2(gbs, 1);
+    if (vol === "unk") {
+      return { spec: { k: "vip" }, price: P.vip, title: "پلن VIP نامحدود", text: "اگه مصرفتو نمی‌دونی، نامحدود بی‌دردسرترین انتخابه و نگران تموم شدن حجم نیستی." };
+    }
+    if (c >= P.vip) {
+      return { spec: { k: "vip" }, price: P.vip, title: "پلن VIP نامحدود", text: `با این مصرف، حجمی (حدود ${money(c)} تومان) از VIP گرون‌تر درمیاد. از حدود ${fa(be)} گیگ به بالا نامحدود به‌صرفه‌تره.` };
+    }
+    return { spec: { k: "v2ray", gb: gbs, users: 1, months: 1 }, price: c, title: "V2RayNG حجمی",
+      text: `برای مصرف ${vol === "low" ? "کم" : "متوسط"} حجمی ارزون‌تر درمیاد: ${fa(gbs)} گیگ برای یک ماه. اگه مصرفت به حدود ${fa(be)} گیگ رسید، VIP نامحدود به‌صرفه‌تره.` + (use === "video" ? " ویدیو حجم زیادی می‌خوره، پس حواست به مصرف باشه." : "") };
+  }
+  function renderQuiz() {
+    const box = $("#qbox");
+    if (qi < QZ.length) {
+      const q = QZ[qi];
+      box.innerHTML = `<div class="dots">${QZ.map((_, i) => `<i class="${i <= qi ? "on" : ""}"></i>`).join("")}</div><div class="qt">${q.q}</div><div class="opts">${q.o.map((o, i) => `<button class="opt" data-i="${i}">${ico("chevl")}${o[0]}</button>`).join("")}</div>`;
+      $$("#qbox .opt").forEach(b => b.onclick = () => { qa.push(q.o[+b.dataset.i][1]); qi++; haptic(); renderQuiz(); });
+      return;
+    }
+    const r = recommend(qa);
+    box.innerHTML = `<div class="res"><b>${r.title}</b><p>${r.text}</p><span class="pr">${money(r.price)} تومان</span></div><div class="btns" style="grid-template-columns:1fr 1.25fr"><button class="btn ghost" id="qre">دوباره</button><button class="btn" id="qbuy">${ico("cart")}بنداز تو سبد</button></div>`;
+    $("#qre").onclick = () => { qa = []; qi = 0; haptic(); renderQuiz(); };
+    $("#qbuy").onclick = () => addItem(r.spec, true);
+  }
+  renderQuiz();
+
+  /* ---------- usage calculator ---------- */
+  const UR = [["وب‌گردی و شبکه‌های اجتماعی", 0.35, 2, "globe"], ["ویدیو و استریم", 1.2, 1, "play"], ["بازی آنلاین", 0.08, 0, "game"], ["تماس تصویری", 0.7, 0, "phone"]];
+  const uh = UR.map(r => r[2]);
+  $("#ubox").innerHTML = UR.map((r, i) => `<div class="row"><div class="rl"><span>${ico(r[3])}${r[0]}</span><b id="uh${i}"></b></div><input type="range" class="ur" data-i="${i}" min="0" max="8" step="0.5" value="${r[2]}"></div>`).join("");
+  function renderUsage() {
+    let m = 0;
+    UR.forEach((r, i) => {
+      $("#uh" + i).textContent = fh(uh[i]) + " ساعت در روز";
+      $$(".ur")[i].style.setProperty("--p", (uh[i] / 8 * 100) + "%");
+      m += uh[i] * r[1] * 30;
+    });
+    const mm = Math.round(m * 10) / 10;
+    const sg = Math.min(500, Math.max(10, Math.ceil(m * 1.15 / 10) * 10));
+    const cost = sg * P.gb;
+    $("#ures").innerHTML = `<div class="res"><b>حدود ${fh(mm)} گیگ در ماه</b><p>پیشنهاد: ${fa(sg)} گیگ (با ۱۵ درصد اضافه برای اطمینان) که حدود ${money(cost)} تومان می‌شه. ` +
+      (cost >= P.vip ? "این مبلغ از پلن VIP نامحدود بیشتره یا برابره، پس نامحدود به‌صرفه‌تره. " : "") +
+      `اعداد تخمینی‌ان و به کیفیت ویدیو و اپ‌ها بستگی داره.</p></div><button class="btn" id="uapply">${ico("sliders")}اعمال روی ماشین‌حساب V2Ray</button>`;
+    $("#uapply").onclick = () => { st.gb = sg; renderCalc(); haptic(); go("p-v2ray"); };
+  }
+  $$(".ur").forEach(el => el.addEventListener("input", () => { uh[+el.dataset.i] = +el.value; renderUsage(); }));
+  renderUsage();
+
+  /* ---------- connection test ---------- */
+  const NET = { ip: $("#nIp"), cc: $("#nCc"), ping: $("#nPing"), spd: $("#nSpd") };
+  let lastNet = null, netBusy = false;
+  const setT = (el, v, ld) => { el.textContent = v; el.classList.toggle("ld", !!ld); };
+  async function ft(url, ms) {
+    const c = new AbortController(); const t = setTimeout(() => c.abort(), ms);
+    try { return await fetch(url, { signal: c.signal, cache: "no-store" }); } finally { clearTimeout(t); }
+  }
+  async function trace() {
+    const r = await ft("https://www.cloudflare.com/cdn-cgi/trace?t=" + Date.now(), 5000);
+    const t = await r.text(); const m = {};
+    t.split("\n").forEach(l => { const i = l.indexOf("="); if (i > 0) m[l.slice(0, i)] = l.slice(i + 1).trim(); });
+    return m;
+  }
+  const cname = code => { try { return new Intl.DisplayNames(["fa"], { type: "region" }).of(code) || code; } catch (e) { return code; } };
+  async function loadIp() {
+    setT(NET.ip, "در حال بررسی...", 1); setT(NET.cc, "...", 1);
+    try {
+      const m = await trace();
+      setT(NET.ip, m.ip || "نامشخص"); setT(NET.cc, m.loc ? cname(m.loc) + " (" + m.loc + ")" : "نامشخص");
+      return m;
+    } catch (e) { setT(NET.ip, "نامشخص"); setT(NET.cc, "نامشخص"); return null; }
+  }
+  async function runNet() {
+    if (netBusy) return; netBusy = true;
+    const btn = $("#ntest"); btn.disabled = true; btn.lastChild.textContent = "در حال تست...";
+    setT(NET.ping, "...", 1); setT(NET.spd, "...", 1);
+    const m = await loadIp();
+    let pg = null;
+    try {
+      const ts = [];
+      for (let i = 0; i < 5; i++) { const t0 = performance.now(); const r = await ft("https://www.cloudflare.com/cdn-cgi/trace?t=" + Date.now() + i, 4000); await r.text(); ts.push(performance.now() - t0); }
+      ts.shift(); ts.sort((a, b) => a - b); pg = Math.round(ts[Math.floor(ts.length / 2)]);
+    } catch (e) {}
+    setT(NET.ping, pg != null ? fa(pg) + " ms" : "نامشخص");
+    let sp = null;
+    try {
+      const t0 = performance.now(); const r = await ft("https://speed.cloudflare.com/__down?bytes=4000000", 12000);
+      const b = await r.arrayBuffer(); sp = (b.byteLength * 8 / 1e6) / ((performance.now() - t0) / 1000);
+    } catch (e) {}
+    setT(NET.spd, sp != null ? fh(Math.round(sp * 10) / 10) + " Mbps" : "نامشخص");
+    const cur = { ip: m && m.ip, cc: m && m.loc, pg, sp };
+    const fmt = x => `IP ${x.ip || "—"} (${x.cc || "—"}) • پینگ ${x.pg != null ? fa(x.pg) + " ms" : "—"} • سرعت ${x.sp != null ? fh(Math.round(x.sp * 10) / 10) + " Mbps" : "—"}`;
+    if (!m && pg == null && sp == null) $("#nprev").textContent = "نتونستم به سرویس تست وصل بشم. اینترنتت یا دسترسی به این سرویس محدوده؛ بعد از وصل شدن به VPN دوباره امتحان کن.";
+    else $("#nprev").textContent = (lastNet ? "نتیجه قبلی: " + fmt(lastNet) + ". نتیجه فعلی: " : "نتیجه: ") + fmt(cur) + ". حالا وصل یا قطع کن و دوباره تست بزن تا مقایسه کنی.";
+    lastNet = cur; btn.disabled = false; btn.lastChild.textContent = "تست دوباره"; netBusy = false; haptic("medium");
+  }
+  $("#ntest").addEventListener("click", runNet);
+
+  /* ---------- referral ---------- */
+  $("#mycode").textContent = myCode;
+  $("#ccopy").addEventListener("click", async () => { haptic(); toast((await copy(myCode)) ? "کد کپی شد" : "کپی نشد، کد رو دستی بنویس"); });
+  $("#cshare").addEventListener("click", () => {
+    const link = BOT_APP_LINK ? BOT_APP_LINK + "?startapp=ref_" + myCode : "https://t.me/" + ADMIN;
+    const t = `یه فیلترشکن خوب پیدا کردم: ${BRAND}\nموقع خرید این کد معرف رو وارد کن تا ${fa(REF_PERCENT)} درصد تخفیف بگیری: ${myCode}`;
+    openTg("https://t.me/share/url?url=" + enc(link) + "&text=" + enc(t));
+  });
 
   /* ---------- connection guide ---------- */
   const GUIDE = {
-    wg: {
-      app: "WireGuard", plat: "اندروید • iOS • ویندوز • مک",
-      steps: [
-        ["اپ رو نصب کن", "اپ رسمی WireGuard رو از استور گوشی یا سایت خودش نصب کن."],
-        ["کانفیگتو بگیر", "بعد از خرید، ادمین فایل کانفیگ یا QR رو برات می‌فرسته."],
-        ["ایمپورتش کن", "تو اپ علامت + رو بزن و «Import from file» یا «Scan QR code» رو انتخاب کن."],
-        ["وصل شو", "سوییچ کنار اسم کانفیگ رو روشن کن. تمام! 🎉"]
-      ]
-    },
-    awg: {
-      app: "AmneziaWG", plat: "اندروید • iOS • ویندوز • مک",
-      steps: [
-        ["اپ رو نصب کن", "اپ AmneziaWG یا Amnezia VPN رو نصب کن؛ اگه مطمئن نیستی کدوم، از ادمین بپرس."],
-        ["کانفیگتو بگیر", "فایل کانفیگ یا QR رو از ادمین بگیر."],
-        ["ایمپورتش کن", "تو اپ گزینه افزودن تونل رو بزن و فایل یا QR رو بده بهش."],
-        ["وصل شو", "تونل رو روشن کن و برو سراغ بازیت. 🎮"]
-      ]
-    },
-    ovpn: {
-      app: "OpenVPN Connect", plat: "اندروید • iOS • ویندوز • مک",
-      steps: [
-        ["اپ رو نصب کن", "اپ OpenVPN Connect رو نصب کن."],
-        ["فایل .ovpn رو بگیر", "ادمین فایلی با پسوند ovpn برات می‌فرسته."],
-        ["ایمپورتش کن", "تو اپ بخش Upload File رو بزن و فایل رو انتخاب کن. اگه نام‌کاربری و رمز دادیم، وارد کن."],
-        ["وصل شو", "روی Connect بزن و تموم."]
-      ]
-    },
-    v2: {
-      app: "v2rayNG", plat: "اندروید: v2rayNG • ویندوز: v2rayN • iOS: اپ‌های سازگار",
-      steps: [
-        ["اپ رو نصب کن", "تو اندروید v2rayNG، تو ویندوز v2rayN. برای آیفون ادمین بهت اپ مناسب رو معرفی می‌کنه."],
-        ["لینک کانفیگ رو کپی کن", "بعد از خرید، لینک اشتراک یا کانفیگ رو از ادمین می‌گیری."],
-        ["ایمپورتش کن", "تو اپ + رو بزن و «Import config from clipboard» رو انتخاب کن."],
-        ["وصل شو", "کانفیگو انتخاب کن و دکمه اتصال رو بزن. ✅"]
-      ]
-    }
+    wg: { app: "WireGuard", plat: "اندروید • iOS • ویندوز • مک", steps: [
+      ["اپ رو نصب کن", "اپ رسمی WireGuard رو از استور گوشی یا سایت خودش نصب کن.", "down"],
+      ["کانفیگتو بگیر", "بعد از خرید، ادمین فایل کانفیگ یا QR رو برات می‌فرسته.", "chat"],
+      ["ایمپورتش کن", "تو اپ علامت + رو بزن و «Import from file» یا «Scan QR code» رو انتخاب کن.", "plus"],
+      ["وصل شو", "سوییچ کنار اسم کانفیگ رو روشن کن. تمام!", "zap"]
+    ] },
+    awg: { app: "AmneziaWG", plat: "اندروید • iOS • ویندوز • مک", steps: [
+      ["اپ رو نصب کن", "اپ AmneziaWG رو نصب کن؛ اگه مطمئن نیستی کدوم نسخه رو بگیری، از ادمین بپرس.", "down"],
+      ["کانفیگتو بگیر", "فایل کانفیگ یا QR رو از ادمین بگیر.", "chat"],
+      ["ایمپورتش کن", "تو اپ گزینه افزودن تونل رو بزن و فایل یا QR رو بده بهش.", "plus"],
+      ["وصل شو", "تونل رو روشن کن و برو سراغ بازیت.", "game"]
+    ] },
+    ovpn: { app: "OpenVPN Connect", plat: "اندروید • iOS • ویندوز • مک", steps: [
+      ["اپ رو نصب کن", "اپ OpenVPN Connect رو نصب کن.", "down"],
+      ["فایل .ovpn رو بگیر", "ادمین فایلی با پسوند ovpn برات می‌فرسته.", "chat"],
+      ["ایمپورتش کن", "تو اپ بخش Upload File رو بزن و فایل رو انتخاب کن. اگه نام‌کاربری و رمز دادیم، وارد کن.", "plus"],
+      ["وصل شو", "روی Connect بزن و تموم.", "zap"]
+    ] },
+    v2: { app: "v2rayNG", plat: "اندروید: v2rayNG • ویندوز: v2rayN • iOS: اپ‌های سازگار", steps: [
+      ["اپ رو نصب کن", "تو اندروید v2rayNG، تو ویندوز v2rayN. برای آیفون ادمین بهت اپ مناسب رو معرفی می‌کنه.", "down"],
+      ["لینک کانفیگ رو کپی کن", "بعد از خرید، لینک اشتراک یا کانفیگ رو از ادمین می‌گیری.", "copy"],
+      ["ایمپورتش کن", "تو اپ + رو بزن و «Import config from clipboard» رو انتخاب کن. یا از ابزار «لینک یا کانفیگ داری؟» همین پایین استفاده کن.", "plus"],
+      ["وصل شو", "کانفیگو انتخاب کن و دکمه اتصال رو بزن.", "zap"]
+    ] }
   };
   function showGuide(k) {
     const g = GUIDE[k];
     $$("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.g === k));
     $("#gbox").innerHTML =
       `<div class="gapp"><div class="pi">${ico("phone")}</div><div><b>${g.app}</b><small>${g.plat}</small></div></div>` +
-      g.steps.map((s, i) => `<div class="step"><div class="n">${fa(i + 1)}</div><div><b>${s[0]}</b><small>${s[1]}</small></div></div>`).join("") +
+      g.steps.map(s => `<div class="step"><div class="n">${ico(s[2])}</div><div><b>${s[0]}</b><small>${s[1]}</small></div></div>`).join("") +
       `<p class="gnote">هنوز وصل نشدی؟ نگران نباش، تو پیوی پیام بده تا همراهیت کنیم.</p>`;
   }
   $$("#tabs button").forEach(b => b.addEventListener("click", () => { showGuide(b.dataset.g); haptic(); }));
   showGuide("wg");
+
+  /* ---------- config link tool ---------- */
+  function analyze(v) {
+    v = v.trim(); if (!v) return null;
+    const v2apps = [["v2rayNG", "v2rayng://install-config?url=" + enc(v)], ["Hiddify", "hiddify://import/" + v], ["Streisand", "streisand://import/" + v]];
+    if (/^(vless|vmess|trojan|ss|hysteria2|hy2|tuic):\/\//i.test(v)) return { type: "لینک کانفیگ V2Ray", kind: "link", apps: v2apps, note: "اگه اپ باز نشد، کانفیگ کپی شده؛ تو اپ + رو بزن و از کلیپ‌بورد ایمپورتش کن." };
+    if (/^https?:\/\//i.test(v)) {
+      if (/\.ovpn(\?|#|$)/i.test(v)) return { type: "فایل OpenVPN آنلاین", kind: "link", apps: [["OpenVPN Connect", "openvpn://import-profile/" + v]], note: "اپ OpenVPN Connect باید نصب باشه." };
+      return { type: "لینک اشتراک", kind: "link", apps: v2apps, note: "لینک اشتراک رو تو یکی از این اپ‌ها باز کن. اگه اپ باز نشد، لینک کپی شده و دستی هم می‌تونی اضافه‌ش کنی." };
+    }
+    if (/\[Interface\]/i.test(v)) {
+      const awg = /^\s*(Jc|Jmin|Jmax|S1|S2|H1|H2|H3|H4)\s*=/mi.test(v);
+      return { type: awg ? "کانفیگ AmneziaWG" : "کانفیگ WireGuard", kind: "file", file: "ferdosi.conf", note: "فایل رو ذخیره کن و تو اپ " + (awg ? "AmneziaWG" : "WireGuard") + " با Import from file وارد کن." };
+    }
+    if (/^\s*client\b/m.test(v) && /^\s*remote\s/m.test(v)) return { type: "پروفایل OpenVPN", kind: "file", file: "ferdosi.ovpn", note: "فایل رو ذخیره کن و تو OpenVPN Connect با Upload File وارد کن." };
+    return { type: "نوع کانفیگ شناسایی نشد", kind: "none", note: "لینک یا متن کامل کانفیگ رو بچسبون. اگه مطمئنی درسته، تو پیوی از ادمین بپرس." };
+  }
+  function renderCfg() {
+    const v = $("#cfg").value, r = analyze(v), box = $("#cres");
+    if (!r) { box.innerHTML = ""; return; }
+    let h = `<div class="res"><b>${r.type}</b><p>${r.note}</p></div>`;
+    if (r.kind !== "none") {
+      h += `<div class="opts"><button class="opt" data-a="copy">${ico("copy")}کپی کانفیگ</button>`;
+      (r.apps || []).forEach((a, i) => h += `<button class="opt" data-a="app" data-i="${i}">${ico("phone")}باز کردن در ${a[0]}</button>`);
+      if (r.file) h += `<button class="opt" data-a="file">${ico("down")}ذخیره به‌صورت فایل ${r.file}</button>`;
+      h += `</div>`;
+    }
+    box.innerHTML = h;
+    $$("#cres .opt").forEach(b => b.onclick = async () => {
+      haptic();
+      const a = b.dataset.a;
+      if (a === "copy") toast((await copy(v.trim())) ? "کانفیگ کپی شد" : "کپی نشد");
+      else if (a === "file") { saveText(r.file, v.trim() + "\n"); toast("فایل ذخیره شد"); }
+      else { await copy(v.trim()); toast("اگه اپ باز نشد، کانفیگ کپی شده؛ تو اپ دستی ایمپورتش کن"); try { window.location.href = r.apps[+b.dataset.i][1]; } catch (e) {} }
+    });
+  }
+  $("#cfg").addEventListener("input", renderCfg);
+  $("#cpaste").addEventListener("click", async () => {
+    haptic();
+    try { const t = await navigator.clipboard.readText(); $("#cfg").value = t; renderCfg(); }
+    catch (e) { toast("اجازه دسترسی به کلیپ‌بورد داده نشد؛ دستی بچسبون"); }
+  });
 
   /* ---------- faq ---------- */
   $$(".q button").forEach(b => b.addEventListener("click", () => {
@@ -569,33 +1327,34 @@ footer b{color:var(--purple-2);font-weight:600}
     haptic();
   }));
 
-  /* ---------- navigation ---------- */
-  const go = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); };
-  $$("#nav [data-t]").forEach(b => b.addEventListener("click", () => { haptic(); go(b.dataset.t); }));
-  const secs = ["home", "plans", "guide", "support"].map(id => document.getElementById(id));
-  function spy() {
-    let cur = "home";
-    const y = window.innerHeight * 0.4;
-    secs.forEach(s => { if (s.getBoundingClientRect().top <= y) cur = s.id; });
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 8) cur = "support";
-    $$("#nav [data-t]").forEach(b => b.classList.toggle("on", b.dataset.t === cur));
-  }
-  window.addEventListener("scroll", spy, { passive: true }); spy();
-
   /* ---------- search ---------- */
   const norm = s => String(s).toLowerCase()
     .replace(/ي/g, "ی").replace(/ك/g, "ک").replace(/[آأإ]/g, "ا")
     .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
     .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-    .replace(/[\u200c\u064b-\u065f]/g, " ").replace(/\s+/g, " ").trim();
-
+    .replace(/[‌ً-ٟ]/g, " ").replace(/\s+/g, " ").trim();
+  function openFaq(n) {
+    go("support");
+    setTimeout(() => { $$(".q").forEach((q, i) => q.classList.toggle("open", i === n)); }, 350);
+  }
   const INDEX = [
-    { t: "پلن GAMING نامحدود", s: "۳۰۰ هزار تومان • WireGuard و AmneziaWG", i: "game", k: "گیم گیمینگ بازی gaming پینگ ۳۰۰ سیصد نامحدود amnezia وایرگارد", a: () => go("p-gaming") },
-    { t: "پلن VIP نامحدود", s: "۲۰۰ هزار تومان • WireGuard و OpenVPN", i: "crown", k: "وی آی پی vip ارزان ۲۰۰ دویست نامحدود openvpn", a: () => go("p-vip") },
-    { t: "پلن V2RayNG حجمی", s: "هر گیگ ۳ هزار تومان", i: "zap", k: "وی تو ری v2ray v2rayng حجمی گیگ حجم کاربر ماه قیمت", a: () => go("p-v2ray") },
-    { t: "قیمت‌ها و ماشین‌حساب حجم", s: "حجم، کاربر و ماه دلخواه", i: "bag", k: "قیمت تعرفه هزینه محاسبه گیگ کاربر اضافه ماه اضافه ۴۵ ۷۵", a: () => go("p-v2ray") },
+    { t: "پلن تست ۲ دقیقه‌ای", s: "رایگان، قبل از خرید امتحان کن", i: "flask", k: "تست رایگان امتحان دو دقیقه ۲ دقیقه free trial", a: () => go("p-test") },
+    { t: "پلن GAMING نامحدود", s: money(P.gaming) + " تومان • WireGuard و AmneziaWG", i: "game", k: "گیم گیمینگ بازی gaming پینگ نامحدود amnezia amenzia وایرگارد", a: () => go("p-gaming") },
+    { t: "پلن VIP نامحدود", s: money(P.vip) + " تومان • WireGuard و OpenVPN", i: "crown", k: "وی آی پی vip معمولی ارزان نامحدود openvpn", a: () => go("p-vip") },
+    { t: "پلن V2RayNG حجمی", s: "هر گیگ " + money(P.gb) + " تومان", i: "zap", k: "وی تو ری v2ray v2rayng حجمی گیگ حجم کاربر ماه قیمت", a: () => go("p-v2ray") },
+    { t: "قیمت‌ها و ماشین‌حساب حجم", s: "حجم، کاربر و ماه دلخواه", i: "bag", k: "قیمت تعرفه هزینه محاسبه گیگ کاربر اضافه ماه اضافه", a: () => go("p-v2ray") },
+    { t: "سبد خرید", s: "اقلام انتخاب‌شده و تأیید سفارش", i: "cart", k: "سبد خرید سفارش پرداخت تأیید cart", a: () => openCart() },
+    { t: "مقایسه پلن‌ها", s: "جدول کنار هم", i: "table", k: "مقایسه فرق تفاوت جدول کدوم بهتره انتخاب", a: () => go("p-compare") },
+    { t: "پلن مناسب من کدومه؟", s: "۳ سؤال ساده", i: "compass", k: "پیشنهاد کدوم پلن مناسب انتخاب سوال تست راهنمایی", a: () => go("t-quiz") },
+    { t: "حجم مصرفی‌تو حساب کن", s: "ماشین‌حساب مصرف ماهانه", i: "calc", k: "مصرف حجم گیگ ساعت یوتیوب اینستاگرام ماشین حساب چقدر", a: () => go("t-usage") },
+    { t: "تست اتصال و IP", s: "پینگ، سرعت و آی‌پی", i: "gauge", k: "تست سرعت پینگ ip آی پی موقعیت کشور اتصال اینترنت", a: () => go("t-net") },
+    { t: "دعوت دوستان و کد معرف", s: "کد مخصوص تو و ۵ درصد تخفیف", i: "users", k: "معرف دعوت دوست رفرال کد لینک", a: () => go("t-ref") },
+    { t: "کد تخفیف", s: "تو سبد خرید وارد می‌شه", i: "tag", k: "تخفیف کد off discount ارزون", a: () => openCart() },
+    { t: "هدیه دادن اشتراک", s: "تو سبد خرید روشنش کن", i: "gift", k: "هدیه کادو gift برای دوستم اشتراک", a: () => openCart() },
+    { t: "رسید ثبت سفارش", s: "تصویر قابل ذخیره و اشتراک", i: "receipt", k: "رسید فاکتور سفارش عکس ذخیره", a: () => openCart() },
+    { t: "لینک یا کانفیگ داری؟", s: "باز کردن مستقیم تو اپ", i: "link", k: "لینک کانفیگ کپی ایمپورت vless vmess اشتراک sub باز کردن اپ", a: () => go("t-cfg") },
     { t: "آموزش WireGuard", s: "نصب و ایمپورت کانفیگ", i: "book", k: "وایرگارد wireguard آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("wg"); } },
-    { t: "آموزش AmneziaWG", s: "نصب و ایمپورت کانفیگ", i: "book", k: "امنزیا amnezia awg آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("awg"); } },
+    { t: "آموزش AmneziaWG", s: "نصب و ایمپورت کانفیگ", i: "book", k: "امنزیا amnezia amenzia awg amneziawg آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("awg"); } },
     { t: "آموزش OpenVPN", s: "ایمپورت فایل ovpn", i: "book", k: "اوپن وی پی ان openvpn ovpn آموزش نصب اتصال", a: () => { go("guide"); showGuide("ovpn"); } },
     { t: "آموزش V2RayNG", s: "اندروید، ویندوز و iOS", i: "book", k: "v2ray v2rayng v2rayn آیفون ios اندروید ویندوز آموزش نصب لینک", a: () => { go("guide"); showGuide("v2"); } },
     { t: "خرید چطوریه؟", s: "مراحل سفارش و تحویل", i: "bag", k: "خرید سفارش پرداخت تحویل مراحل کارت", a: () => go("guide") },
@@ -605,49 +1364,41 @@ footer b{color:var(--purple-2);font-weight:600}
     { t: "وصل نشدم، چیکار کنم؟", s: "سؤال متداول", i: "help", k: "وصل نمیشه مشکل اتصال خطا کار نمیکنه رفع", a: () => openFaq(3) },
     { t: "ارتباط با پشتیبانی", s: "پیوی ادمین", i: "chat", k: "پشتیبانی ادمین پیوی پیام تماس ارتباط پشتیبان", a: () => openAdmin("") }
   ];
-  function openFaq(n) {
-    go("support");
-    setTimeout(() => { $$(".q").forEach((q, i) => q.classList.toggle("open", i === n)); }, 350);
+  const SUGG = ["تست", "گیم", "قیمت", "آیفون", "وایرگارد", "تخفیف", "هدیه"];
+  const itemHtml = it => `<button class="sitem" data-id="${INDEX.indexOf(it)}"><div class="pi">${ico(it.i)}</div><div><b>${it.t}</b><small>${it.s}</small></div></button>`;
+  function bindSearch() {
+    $$("#sres .sitem").forEach(b => b.addEventListener("click", () => { const it = INDEX[+b.dataset.id]; haptic(); hide("ssheet"); setTimeout(it.a, 250); }));
+    $$("#sres .sugg button").forEach(b => b.addEventListener("click", () => { $("#sinp").value = b.dataset.q; renderSearch(b.dataset.q); }));
   }
-  const SUGG = ["گیم", "قیمت", "آیفون", "وایرگارد", "پشتیبانی", "وصل نمیشه"];
-
   function renderSearch(q) {
-    const box = $("#sres");
-    const nq = norm(q);
+    const box = $("#sres"), nq = norm(q);
     if (!nq) {
-      box.innerHTML = `<div class="lbl">پیشنهادها</div><div class="sugg">${SUGG.map(s => `<button data-q="${s}">${s}</button>`).join("")}</div>` +
-        `<div class="lbl" style="margin-top:8px">همه موارد</div>` + INDEX.slice(0, 5).map(itemHtml).join("");
-      bind(INDEX.slice(0, 5)); return;
+      box.innerHTML = `<div class="lbl">پیشنهادها</div><div class="sugg">${SUGG.map(s => `<button data-q="${s}">${s}</button>`).join("")}</div><div class="lbl" style="margin-top:8px">میانبرها</div>` + INDEX.slice(0, 6).map(itemHtml).join("");
+      bindSearch(); return;
     }
     const words = nq.split(" ");
     const res = INDEX.filter(it => { const hay = norm(it.t + " " + it.s + " " + it.k); return words.every(w => hay.includes(w)); });
-    if (!res.length) { box.innerHTML = `<div class="sempty">چیزی پیدا نکردم 🤔<br>یه کلمه دیگه امتحان کن یا بیا پیوی بپرس.</div><button class="btn ghost" id="sAsk">${ico("chat")}بپرس از پشتیبانی</button>`; $("#sAsk").onclick = () => openAdmin(""); return; }
-    box.innerHTML = res.map(itemHtml).join(""); bind(res);
-  }
-  const itemHtml = it => `<button class="sitem" data-id="${INDEX.indexOf(it)}"><div class="pi">${ico(it.i)}</div><div><b>${it.t}</b><small>${it.s}</small></div></button>`;
-  function bind() {
-    $$("#sres .sitem").forEach(b => b.addEventListener("click", () => { const it = INDEX[+b.dataset.id]; haptic(); closeSearch(); setTimeout(it.a, 250); }));
-    $$("#sres .sugg button").forEach(b => b.addEventListener("click", () => { $("#sinp").value = b.dataset.q; renderSearch(b.dataset.q); }));
+    if (!res.length) {
+      box.innerHTML = `<div class="sempty">چیزی پیدا نکردم.<br>یه کلمه دیگه امتحان کن یا بیا پیوی بپرس.</div><button class="btn ghost" id="sAsk">${ico("chat")}بپرس از پشتیبانی</button>`;
+      $("#sAsk").onclick = () => openAdmin(""); return;
+    }
+    box.innerHTML = res.map(itemHtml).join(""); bindSearch();
   }
   function openSearch() {
-    closeSheet();
-    $("#ov").classList.add("on"); $("#ssheet").classList.add("on");
+    hide("sheet"); show("ssheet");
     $("#sinp").value = ""; renderSearch("");
     setTimeout(() => $("#sinp").focus(), 300); haptic();
   }
-  function closeSearch(keepOv) {
-    $("#ssheet").classList.remove("on"); $("#sinp").blur();
-    if (!keepOv && !$("#sheet").classList.contains("on")) $("#ov").classList.remove("on");
-  }
   $("#sbar").addEventListener("click", openSearch);
   $("#navSearch").addEventListener("click", openSearch);
-  $("#sclose").addEventListener("click", () => closeSearch());
+  $("#sclose").addEventListener("click", () => { hide("ssheet"); $("#sinp").blur(); });
   $("#sinp").addEventListener("input", e => renderSearch(e.target.value));
-  $("#ov").addEventListener("click", () => { closeSearch(); closeSheet(); $("#ov").classList.remove("on"); });
 
   /* ---------- reveal ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .06 });
   $$(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 60 + "ms"; io.observe(el); });
+  const nio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { nio.disconnect(); loadIp(); } }), { threshold: .3 });
+  nio.observe($("#t-net"));
 })();
 </script>
 </body>

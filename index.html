@@ -57,8 +57,8 @@ header{display:flex;align-items:center;justify-content:space-between;gap:10px;ma
 .logo::after{content:"";position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2.5px solid var(--bg);box-shadow:0 0 10px var(--ok)}
 .brand b{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;letter-spacing:.2px;direction:ltr;justify-content:flex-end}
 .brand small{font-size:11px;color:var(--muted);display:block;margin-top:1px}
-.pbadge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;letter-spacing:0;padding:3px 9px;border-radius:8px;color:#fff;direction:rtl;
-  background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 3px 12px rgba(139,92,246,.5);white-space:nowrap}
+.pbadge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:0;padding:3px 9px;border-radius:8px;color:var(--on);direction:rtl;
+  background:var(--grad);box-shadow:0 3px 12px rgba(var(--ar),.45);white-space:nowrap}
 .pbadge[hidden]{display:none}
 .hb{position:relative;flex:none;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;cursor:pointer;color:var(--a);padding:0}
 .hb .cnt{position:absolute;top:-7px;left:-7px;min-width:20px;height:20px;border-radius:99px;background:var(--grad);color:var(--on);font-size:11px;font-weight:800;display:none;place-items:center;padding:0 5px;box-shadow:0 3px 10px rgba(var(--ar),.5)}
@@ -350,6 +350,22 @@ footer b{color:var(--a);font-weight:600}
 
 .rv{opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
+.ic.fill{fill:currentColor;stroke:none}
+.btn.ghost .ic.fill{color:var(--a)}
+.chan{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;margin-bottom:22px;cursor:pointer;color:var(--text);text-align:right;border-color:var(--stroke-a);box-shadow:0 10px 40px rgba(0,0,0,.4),0 0 30px rgba(var(--ar),.1),inset 0 1px 0 rgba(255,255,255,.07)}
+.chan:active{transform:scale(.985)}
+.tgl{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:var(--a);flex:none;background:linear-gradient(135deg,rgba(var(--ar),.2),rgba(var(--ar),.05));border:1px solid var(--stroke-a)}
+.tgl .ic{width:30px;height:30px}
+.chan .cm{flex:1;min-width:0}
+.chan .cm b{display:block;font-size:14px;font-weight:700}
+.chan .cm small{display:block;font-size:12px;color:var(--muted);direction:ltr;text-align:right;margin-top:2px}
+.chan>.ic{color:var(--a)}
+.dls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 4px}
+.dl{display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:14px;border:1px solid var(--stroke-a);background:rgba(var(--ar),.08);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;text-align:right;line-height:1.6}
+.dl:active{background:rgba(var(--ar),.22)}
+.dl .ic{width:16px;height:16px;color:var(--a)}
+.dl:last-child:nth-child(odd){grid-column:1/-1}
+.dln{font-size:11.5px;color:var(--muted);line-height:1.9;margin:8px 2px 6px}
 </style>
 </head>
 <body>
@@ -411,6 +427,7 @@ footer b{color:var(--a);font-weight:600}
   <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
   <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
 </svg>
 
 <div class="bg"><i></i><i></i><i></i></div>
@@ -451,21 +468,27 @@ footer b{color:var(--a);font-weight:600}
     <div class="glass"><svg class="ic"><use href="#i-shield"/></svg><b>امن و خصوصی</b><small>پروتکل‌های مدرن</small></div>
   </div>
 
+  <button class="chan glass rv" id="chan">
+    <span class="tgl"><svg class="ic fill"><use href="#i-tg"/></svg></span>
+    <span class="cm"><b>کانال تلگرام فردوسی وی پی ان</b><small>@ferdosimobil</small></span>
+    <svg class="ic"><use href="#i-chevl"/></svg>
+  </button>
+
   <section id="plans">
     <h2 class="sec rv"><svg class="ic"><use href="#i-flask"/></svg>اول امتحان کن</h2>
     <article class="plan glass test rv" id="p-test">
-      <span class="badge"><svg class="ic"><use href="#i-star"/></svg>رایگان</span>
+      <span class="badge"><svg class="ic"><use href="#i-star"/></svg>به‌زودی</span>
       <div class="ph">
         <div class="pi"><svg class="ic"><use href="#i-timer"/></svg></div>
         <div><h3>پلن تست ۲ دقیقه‌ای</h3><small>قبل از خرید امتحانش کن</small></div>
-        <div class="price"><b>رایگان</b><small>۲ دقیقه</small></div>
+        <div class="price"><b>به‌زودی</b><small>رایگان، ۲ دقیقه</small></div>
       </div>
       <ul class="feat">
         <li><svg class="ic"><use href="#i-clock"/></svg>۲ دقیقه وقت داری کیفیت اتصال رو ببینی</li>
         <li><svg class="ic"><use href="#i-activity"/></svg>پینگ و سرعتو خودت تست کن</li>
         <li><svg class="ic"><use href="#i-headset"/></svg>کانفیگ تست رو ادمین تو پیوی برات فعال می‌کنه</li>
       </ul>
-      <button class="btn" id="testbtn"><svg class="ic"><use href="#i-flask"/></svg>درخواست تست رایگان</button>
+      <button class="btn" id="testbtn" disabled><svg class="ic"><use href="#i-clock"/></svg>به‌زودی</button>
     </article>
 
     <h2 class="sec rv"><svg class="ic"><use href="#i-infinity"/></svg>پلن‌های نامحدود</h2>
@@ -477,7 +500,7 @@ footer b{color:var(--a);font-weight:600}
         <div><h3>پلن GAMING</h3><small>نامحدود</small></div>
         <div class="price"><b data-p="gaming"></b><small>تومان</small></div>
       </div>
-      <div class="proto"><span><svg class="ic"><use href="#i-shield"/></svg>WireGuard</span><span><svg class="ic"><use href="#i-zap"/></svg>AmneziaWG</span></div>
+      <div class="proto"><span><svg class="ic"><use href="#i-shield"/></svg>WireGuard</span><span><svg class="ic"><use href="#i-zap"/></svg>Amenzia</span></div>
       <ul class="feat">
         <li><svg class="ic"><use href="#i-infinity"/></svg>حجمش نامحدوده، هرچقدر خواستی بزن</li>
         <li><svg class="ic"><use href="#i-game"/></svg>مخصوص گیم آنلاین و تماس تصویری</li>
@@ -553,7 +576,7 @@ footer b{color:var(--a);font-weight:600}
         <tbody>
           <tr><td>قیمت</td><td class="hl"><b data-p="gaming"></b><small>تومان</small></td><td><b data-p="vip"></b><small>تومان</small></td><td><b data-p="gb"></b><small>هر گیگ</small></td></tr>
           <tr><td>حجم</td><td class="hl">نامحدود</td><td>نامحدود</td><td>خودت انتخاب می‌کنی</td></tr>
-          <tr><td>پروتکل</td><td class="hl ltr">WireGuard<br>AmneziaWG</td><td class="ltr">WireGuard<br>OpenVPN</td><td class="ltr">V2Ray</td></tr>
+          <tr><td>پروتکل</td><td class="hl ltr">WireGuard<br>Amenzia</td><td class="ltr">WireGuard<br>OpenVPN</td><td class="ltr">V2Ray</td></tr>
           <tr><td>مناسب</td><td class="hl">گیم و تماس تصویری</td><td>کار و وب‌گردی</td><td>مصرف کم یا متغیر</td></tr>
           <tr><td></td><td class="hl"><button class="cb" data-buy="gaming">انتخاب</button></td><td><button class="cb" data-buy="vip">انتخاب</button></td><td><button class="cb" data-go="p-v2ray">تنظیم</button></td></tr>
         </tbody>
@@ -599,7 +622,7 @@ footer b{color:var(--a);font-weight:600}
     <h2 class="sec rv"><svg class="ic"><use href="#i-book"/></svg>راهنمای اتصال</h2>
     <div class="tabs glass rv" id="tabs">
       <button class="on" data-g="wg">WireGuard</button>
-      <button data-g="awg">AmneziaWG</button>
+      <button data-g="awg">Amenzia</button>
       <button data-g="ovpn">OpenVPN</button>
       <button data-g="v2">V2RayNG</button>
     </div>
@@ -616,7 +639,7 @@ footer b{color:var(--a);font-weight:600}
     <h2 class="sec rv"><svg class="ic"><use href="#i-cart"/></svg>خرید چطوریه؟</h2>
     <div class="buy glass rv">
       <div class="step"><div class="n"><svg class="ic"><use href="#i-bag"/></svg></div><div><b>پلنتو انتخاب کن</b><small>یکی از پلن‌ها رو به سبد اضافه کن یا حجم V2Ray رو دلخواه تنظیم کن. هرچند تا پلن خواستی می‌تونی بذاری تو سبد.</small></div></div>
-      <div class="step"><div class="n"><svg class="ic"><use href="#i-receipt"/></svg></div><div><b>سبدتو چک کن</b><small>تعداد رو تنظیم کن، کد تخفیف یا هدیه رو بزن و رسید ثبت سفارش بگیر. بعد تأیید کن تا بری پیوی ادمین؛ پیام سفارش آماده‌ست.</small></div></div>
+      <div class="step"><div class="n"><svg class="ic"><use href="#i-receipt"/></svg></div><div><b>سبدتو چک کن</b><small>تعداد رو تنظیم کن، کد تخفیف یا هدیه رو بزن و رسید ثبت سفارش بگیر. بعد تلگرام یا روبیکا رو بزن تا بری پیوی ادمین؛ پیام سفارش آماده‌ست.</small></div></div>
       <div class="step"><div class="n"><svg class="ic"><use href="#i-send"/></svg></div><div><b>پرداخت و دریافت کانفیگ</b><small>بعد از پرداخت، کانفیگ و آموزش وصل شدن همون‌جا تحویلت داده می‌شه.</small></div></div>
     </div>
   </section>
@@ -624,17 +647,21 @@ footer b{color:var(--a);font-weight:600}
   <section id="support">
     <h2 class="sec rv"><svg class="ic"><use href="#i-help"/></svg>سؤال‌های همیشگی</h2>
     <div class="faq glass rv" id="faq">
-      <div class="q"><button><svg class="ic"><use href="#i-game"/></svg><span>کدوم پلن برای گیم بهتره؟</span></button><div>پلن GAMING با WireGuard و AmneziaWG مخصوص گیم آنلاین و تماس تصویریه. اگه بیشتر وب‌گردی و کار داری، VIP هم کفایت می‌کنه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-game"/></svg><span>کدوم پلن برای گیم بهتره؟</span></button><div>پلن GAMING با WireGuard و Amenzia مخصوص گیم آنلاین و تماس تصویریه. اگه بیشتر وب‌گردی و کار داری، VIP هم کفایت می‌کنه.</div></div>
       <div class="q"><button><svg class="ic"><use href="#i-infinity"/></svg><span>فرق نامحدود با حجمی چیه؟</span></button><div>تو GAMING و VIP محدودیت حجم نداری. تو V2RayNG حجم و مدت و تعداد کاربرو خودت انتخاب می‌کنی و همون قیمت حساب می‌شه.</div></div>
-      <div class="q"><button><svg class="ic"><use href="#i-cart"/></svg><span>پرداخت و تحویل چطوریه؟</span></button><div>سبد خریدتو که تأیید کنی می‌ری پیوی ادمین. پرداخت و تحویل کانفیگ همون‌جا انجام می‌شه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-cart"/></svg><span>پرداخت و تحویل چطوریه؟</span></button><div>سبد خریدتو که تأیید کنی، مستقیم می‌ری پیوی تلگرام ادمین (یا می‌تونی از روبیکا پیام بدی). پرداخت و تحویل کانفیگ همون‌جا انجام می‌شه.</div></div>
       <div class="q"><button><svg class="ic"><use href="#i-wifi"/></svg><span>وصل نشدم، چیکار کنم؟</span></button><div>اول آموزش همین صفحه رو یه نگاه بنداز. اگه بازم نشد، تو پیوی پیام بده تا قدم‌به‌قدم کمکت کنیم.</div></div>
       <div class="q"><button><svg class="ic"><use href="#i-gift"/></svg><span>کد تخفیف و هدیه دادن چطوریه؟</span></button><div>تو سبد خرید یه کادر برای کد تخفیف یا معرف هست. اگه اشتراک رو برای کسی می‌گیری، گزینه هدیه رو روشن کن و اسم یا آیدی تلگرامش رو بنویس تا ادمین کانفیگ رو برای اون بفرسته.</div></div>
-      <div class="q"><button><svg class="ic"><use href="#i-timer"/></svg><span>پلن تست ۲ دقیقه‌ای چطوریه؟</span></button><div>رایگانه و برای امتحان کیفیت اتصاله. درخواستشو بفرست تا ادمین تو پیوی کانفیگ تستو برات فعال کنه؛ بعد از ۲ دقیقه خودش قطع می‌شه.</div></div>
+      <div class="q"><button><svg class="ic"><use href="#i-timer"/></svg><span>پلن تست ۲ دقیقه‌ای چطوریه؟</span></button><div>به‌زودی فعال می‌شه. این پلن رایگانه و برای امتحان کیفیت اتصال ۲ دقیقه‌ایه؛ برای اطلاع، کانال تلگرام رو دنبال کن.</div></div>
     </div>
 
     <div class="support glass rv">
       <p>سؤالی داری یا مطمئن نیستی کدوم پلن به دردت می‌خوره؟<br>بیا پیوی، راحت حرف بزنیم.</p>
-      <button class="btn ghost" id="contact"><svg class="ic"><use href="#i-chat"/></svg>حرف زدن با پشتیبانی</button>
+      <div class="opts">
+        <button class="btn" id="contact"><svg class="ic fill"><use href="#i-tg"/></svg>پیوی تلگرام</button>
+        <button class="btn ghost" id="contactR"><svg class="ic"><use href="#i-chat"/></svg>پیام در روبیکا</button>
+        <button class="btn ghost" id="chan2"><svg class="ic fill"><use href="#i-tg"/></svg>کانال تلگرام</button>
+      </div>
     </div>
     <footer><b>به جمع وصلا بپیوند!</b><br>FerdosiVPN © ۲۰۲۶</footer>
   </section>
@@ -694,8 +721,9 @@ footer b{color:var(--a);font-weight:600}
       <button class="btn ghost sm" id="gshare"><svg class="ic"><use href="#i-share"/></svg>ارسال پیام هدیه به دوستم</button>
     </div>
 
-    <p class="note">دکمه پایین رو بزنی، پیام سفارش آماده می‌شه و پیوی ادمین باز می‌شه.<br>پرداخت و تحویل کانفیگ هم همون‌جاست.</p>
-    <button class="btn" id="go"><svg class="ic"><use href="#i-send"/></svg>تأیید و رفتن به پیوی ادمین</button>
+    <p class="note">تلگرام رو بزنی مستقیم پیوی ادمین باز می‌شه و متن سفارش آماده‌ست.<br>تو روبیکا، متن سفارش کپی می‌شه و باید تو پیوی بچسبونیش.<br>پرداخت و تحویل کانفیگ هم همون‌جاست.</p>
+    <button class="btn" id="go"><svg class="ic fill"><use href="#i-tg"/></svg>ثبت سفارش در تلگرام</button>
+    <button class="btn ghost" id="gor" style="margin-top:8px"><svg class="ic"><use href="#i-chat"/></svg>ثبت سفارش در روبیکا</button>
     <button class="btn ghost" id="rcp" style="margin-top:8px"><svg class="ic"><use href="#i-receipt"/></svg>رسید ثبت سفارش</button>
     <button class="clear" id="cclear"><svg class="ic"><use href="#i-trash"/></svg>خالی کردن سبد</button>
   </div>
@@ -720,7 +748,9 @@ footer b{color:var(--a);font-weight:600}
   const PARTNER = false;          // نسخه همکاری؟
   const P = {"gaming": 350000, "vip": 250000, "gb": 5000, "user": 75000, "month": 75000};                  // قیمت‌ها به تومان
   const BRAND = "FerdosiVPN";
-  const ADMIN = "shadowVPN_admin";
+  const ADMIN = "abolfazlfffff";      // آیدی تلگرام ادمین
+  const RUBIKA = "afafafaf77";        // آیدی روبیکا
+  const CHANNEL = "ferdosimobil";     // کانال تلگرام
   // لینک وب‌اپ داخل بات، مثلاً "https://t.me/YourBot/app". اگه خالی باشه فقط کد معرف ارسال می‌شه.
   const BOT_APP_LINK = "";
   // کدهای تخفیف (سمت کاربر چک می‌شن؛ ادمین موقع پرداخت باید دوباره تأییدشون کنه).
@@ -730,7 +760,7 @@ footer b{color:var(--a);font-weight:600}
   /* ========================================== */
 
   const PLANS = {
-    gaming: { name: "GAMING نامحدود", icon: "game", proto: "WireGuard و AmneziaWG" },
+    gaming: { name: "GAMING نامحدود", icon: "game", proto: "WireGuard و Amenzia" },
     vip:    { name: "VIP نامحدود",    icon: "crown", proto: "WireGuard و OpenVPN" }
   };
 
@@ -757,7 +787,7 @@ footer b{color:var(--a);font-weight:600}
   const money = n => fa(Number(n).toLocaleString("en-US"));
   const enc = encodeURIComponent;
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const ico = id => `<svg class="ic"><use href="#i-${id}"/></svg>`;
+  const ico = id => `<svg class="ic${id === "tg" ? " fill" : ""}"><use href="#i-${id}"/></svg>`;
   let toastT;
   const toast = t => { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("on"), 2600); };
   async function copy(t) {
@@ -777,6 +807,12 @@ footer b{color:var(--a);font-weight:600}
     window.open(url, "_blank");
   }
   const openAdmin = text => openTg("https://t.me/" + ADMIN + (text ? "?text=" + enc(text) : ""));
+  const CH_URL = "https://t.me/" + CHANNEL;
+  const RB_URL = "https://rubika.ir/" + RUBIKA;
+  function openExt(url) {
+    try { if (tg && tg.openLink) { tg.openLink(url); return; } } catch (e) {}
+    window.open(url, "_blank", "noopener");
+  }
   const verTag = () => BRAND + (PARTNER ? " - نسخه همکاری" : "");
 
   if (PARTNER) $("#pbadge").hidden = false;
@@ -805,10 +841,10 @@ footer b{color:var(--a);font-weight:600}
 
   /* ---------- promo banner ---------- */
   const SLIDES = [
-    { i: "game", tg: "پیشنهاد گیمرها", ti: "flame", t: "پلن GAMING", s: "پروتکل‌های WireGuard و AmneziaWG برای گیم و تماس تصویری", pr: money(P.gaming), un: "تومان", g: "p-gaming" },
+    { i: "game", tg: "پیشنهاد گیمرها", ti: "flame", t: "پلن GAMING", s: "پروتکل‌های WireGuard و Amenzia برای گیم و تماس تصویری", pr: money(P.gaming), un: "تومان", g: "p-gaming" },
     { i: "crown", tg: "نامحدود", ti: "infinity", t: "پلن VIP", s: "پروتکل‌های WireGuard و OpenVPN برای کار و وب‌گردی", pr: money(P.vip), un: "تومان", g: "p-vip" },
     { i: "zap", tg: "حجمی", ti: "database", t: "V2RayNG حجمی", s: "حجم، کاربر و مدتو خودت انتخاب کن و فقط همونو بپرداز", pr: money(P.gb), un: "تومان برای هر گیگ", g: "p-v2ray" },
-    { i: "flask", tg: "رایگان", ti: "star", t: "تست ۲ دقیقه‌ای", s: "قبل از خرید، کیفیت اتصالو خودت امتحان کن", pr: "رایگان", un: "", g: "p-test" }
+    { i: "flask", tg: "به‌زودی", ti: "clock", t: "تست رایگان ۲ دقیقه‌ای", s: "قبل از خرید، کیفیت اتصالو خودت امتحان کن", pr: "به‌زودی", un: "", g: "p-test" }
   ];
   const bw = $("#bw");
   bw.innerHTML = SLIDES.map(s => `<div class="bsw"><div class="bs" data-go="${s.g}"><div class="bi">${ico(s.i)}</div><span class="bt">${ico(s.ti)}${s.tg}</span><h3>${s.t}</h3><p>${s.s}</p><div class="bp"><strong>${s.pr}</strong><em>${s.un}</em></div><span class="bc">ببین${ico("chevl")}</span></div></div>`).join("");
@@ -983,7 +1019,7 @@ footer b{color:var(--a);font-weight:600}
   $("#gsw").addEventListener("click", () => { haptic(); setGift(!gift.on); });
   [["#gname", "name"], ["#gid", "id"], ["#gmsg", "msg"]].forEach(([s, k]) => $(s).addEventListener("input", e => { gift[k] = e.target.value.trim(); renderSummary(); }));
   $("#gshare").addEventListener("click", () => {
-    const link = BOT_APP_LINK || "https://t.me/" + ADMIN;
+    const link = BOT_APP_LINK || CH_URL;
     const t = `سلام ${gift.name}\nیه اشتراک ${BRAND} برات هدیه گرفتم!` + (gift.msg ? "\n" + gift.msg : "") + `\nبعد از پرداخت، کانفیگ از طرف ادمین برات فرستاده می‌شه.`;
     openTg("https://t.me/share/url?url=" + enc(link) + "&text=" + enc(t.trim()));
   });
@@ -1021,6 +1057,16 @@ footer b{color:var(--a);font-weight:600}
     copy(t); hide("sheet"); openAdmin(t); renderBadges();
   });
   $("#contact").addEventListener("click", () => { haptic(); openAdmin(""); });
+  $("#contactR").addEventListener("click", () => { haptic(); openExt(RB_URL); });
+  $("#chan").addEventListener("click", () => { haptic(); openTg(CH_URL); });
+  $("#chan2").addEventListener("click", () => { haptic(); openTg(CH_URL); });
+  $("#gor").addEventListener("click", async () => {
+    if (!cart.length) return;
+    haptic("medium");
+    const ok = await copy(orderText());
+    toast(ok ? "متن سفارش کپی شد؛ تو پیوی روبیکا بچسبونش" : "کپی نشد؛ سفارشتو دستی تو روبیکا بنویس");
+    setTimeout(() => openExt(RB_URL), 900);
+  });
   $("#testbtn").addEventListener("click", () => {
     haptic("medium");
     openAdmin("سلام\nمی‌خوام پلن تست ۲ دقیقه‌ای رو امتحان کنم (از وب‌اپ " + verTag() + ")");
@@ -1045,7 +1091,7 @@ footer b{color:var(--a);font-weight:600}
     if (gift.on) rows.push({ l: "هدیه برای", v: gift.name || "—" });
     const rh = r => r.sub ? 124 : 86;
     const bodyH = rows.reduce((s, r) => s + rh(r), 0);
-    const top = 290, W = 900, H = top + bodyH + 20 + 110 + 330;
+    const top = 290, W = 900, H = top + bodyH + 20 + 110 + 385;
     const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
     const c = cv.getContext("2d");
     const F = "Vazirmatn, system-ui, sans-serif";
@@ -1089,7 +1135,7 @@ footer b{color:var(--a);font-weight:600}
     c.fillText("این رسید فقط ثبت سفارش رو نشون می‌ده", W / 2, ty + 190);
     c.fillText("و به‌منزله تأیید پرداخت نیست.", W / 2, ty + 224);
     c.fillStyle = "#fde047"; c.font = `700 32px ${F}`; c.fillText("به جمع وصلا بپیوند!", W / 2, ty + 290);
-    c.fillStyle = "#85806a"; c.font = `400 24px ${F}`; c.fillText("@" + ADMIN, W / 2, ty + 332);
+    c.fillStyle = "#85806a"; c.font = `400 24px ${F}`; c.fillText("تلگرام: @" + ADMIN, W / 2, ty + 332); c.fillText("روبیکا: @" + RUBIKA, W / 2, ty + 374);
     rcv = cv;
     return cv.toDataURL("image/png");
   }
@@ -1132,7 +1178,7 @@ footer b{color:var(--a);font-weight:600}
         text: `برای ${fa(n)} کاربر، پلن حجمی شفاف‌ترینه چون تعداد کاربر رو خودت مشخص می‌کنی. پیشنهادم ${fa(gbs)} گیگ برای یک ماه؛ تو ماشین‌حساب بالا می‌تونی دقیق‌ترش کنی. برای چندکاربره بودن پلن‌های نامحدود از ادمین بپرس.` };
     }
     if (use === "game" || use === "mix") {
-      return { spec: { k: "gaming" }, price: P.gaming, title: "پلن GAMING نامحدود", text: "پروتکل‌های WireGuard و AmneziaWG این پلن برای گیم و تماس تصویری انتخاب شدن و حجمش هم نامحدوده." };
+      return { spec: { k: "gaming" }, price: P.gaming, title: "پلن GAMING نامحدود", text: "پروتکل‌های WireGuard و Amenzia این پلن برای گیم و تماس تصویری انتخاب شدن و حجمش هم نامحدوده." };
     }
     const c = v2(gbs, 1);
     if (vol === "unk") {
@@ -1234,32 +1280,40 @@ footer b{color:var(--a);font-weight:600}
   $("#mycode").textContent = myCode;
   $("#ccopy").addEventListener("click", async () => { haptic(); toast((await copy(myCode)) ? "کد کپی شد" : "کپی نشد، کد رو دستی بنویس"); });
   $("#cshare").addEventListener("click", () => {
-    const link = BOT_APP_LINK ? BOT_APP_LINK + "?startapp=ref_" + myCode : "https://t.me/" + ADMIN;
+    const link = BOT_APP_LINK ? BOT_APP_LINK + "?startapp=ref_" + myCode : CH_URL;
     const t = `یه فیلترشکن خوب پیدا کردم: ${BRAND}\nموقع خرید این کد معرف رو وارد کن تا ${fa(REF_PERCENT)} درصد تخفیف بگیری: ${myCode}`;
     openTg("https://t.me/share/url?url=" + enc(link) + "&text=" + enc(t));
   });
 
   /* ---------- connection guide ---------- */
   const GUIDE = {
-    wg: { app: "WireGuard", plat: "اندروید • iOS • ویندوز • مک", steps: [
+    wg: { app: "WireGuard", plat: "اندروید • iOS • ویندوز • مک",
+      dl: [["Google Play (اندروید)", "https://play.google.com/store/apps/details?id=com.wireguard.android"], ["App Store (آیفون)", "https://apps.apple.com/app/id1441195209"], ["ویندوز (سایت رسمی)", "https://download.wireguard.com/windows-client/wireguard-installer.exe"], ["مک (App Store)", "https://apps.apple.com/app/id1451685025"]],
+      dln: "همه لینک‌ها مستقیم به منبع رسمی WireGuard می‌رن.", steps: [
       ["اپ رو نصب کن", "اپ رسمی WireGuard رو از استور گوشی یا سایت خودش نصب کن.", "down"],
       ["کانفیگتو بگیر", "بعد از خرید، ادمین فایل کانفیگ یا QR رو برات می‌فرسته.", "chat"],
       ["ایمپورتش کن", "تو اپ علامت + رو بزن و «Import from file» یا «Scan QR code» رو انتخاب کن.", "plus"],
       ["وصل شو", "سوییچ کنار اسم کانفیگ رو روشن کن. تمام!", "zap"]
     ] },
-    awg: { app: "AmneziaWG", plat: "اندروید • iOS • ویندوز • مک", steps: [
-      ["اپ رو نصب کن", "اپ AmneziaWG رو نصب کن؛ اگه مطمئن نیستی کدوم نسخه رو بگیری، از ادمین بپرس.", "down"],
+    awg: { app: "Amenzia", plat: "اندروید • iOS • ویندوز • مک",
+      dl: [["Google Play (اندروید)", "https://play.google.com/store/apps/details?id=org.amnezia.vpn"], ["App Store (آیفون)", "https://apps.apple.com/app/id1600529900"], ["ویندوز، مک و لینوکس (سایت رسمی)", "https://amnezia.org/downloads"], ["گیت‌هاب (نسخه‌های قبلی)", "https://github.com/amnezia-vpn/amnezia-client/releases"]],
+      dln: "لینک‌ها به صفحه رسمی دانلود و گیت‌هاب خود سازنده می‌رن.", steps: [
+      ["اپ رو نصب کن", "اپ Amenzia رو نصب کن؛ اگه مطمئن نیستی کدوم نسخه رو بگیری، از ادمین بپرس.", "down"],
       ["کانفیگتو بگیر", "فایل کانفیگ یا QR رو از ادمین بگیر.", "chat"],
       ["ایمپورتش کن", "تو اپ گزینه افزودن تونل رو بزن و فایل یا QR رو بده بهش.", "plus"],
       ["وصل شو", "تونل رو روشن کن و برو سراغ بازیت.", "game"]
     ] },
-    ovpn: { app: "OpenVPN Connect", plat: "اندروید • iOS • ویندوز • مک", steps: [
+    ovpn: { app: "OpenVPN Connect", plat: "اندروید • iOS • ویندوز • مک",
+      dl: [["اندروید، ویندوز و مک (سایت رسمی)", "https://openvpn.net/client/"], ["App Store (آیفون)", "https://apps.apple.com/app/id590379981"]],
+      dln: "تو صفحه رسمی OpenVPN لینک همه پلتفرم‌ها هست.", steps: [
       ["اپ رو نصب کن", "اپ OpenVPN Connect رو نصب کن.", "down"],
       ["فایل .ovpn رو بگیر", "ادمین فایلی با پسوند ovpn برات می‌فرسته.", "chat"],
       ["ایمپورتش کن", "تو اپ بخش Upload File رو بزن و فایل رو انتخاب کن. اگه نام‌کاربری و رمز دادیم، وارد کن.", "plus"],
       ["وصل شو", "روی Connect بزن و تموم.", "zap"]
     ] },
-    v2: { app: "v2rayNG", plat: "اندروید: v2rayNG • ویندوز: v2rayN • iOS: اپ‌های سازگار", steps: [
+    v2: { app: "v2rayNG", plat: "اندروید • ویندوز • iOS",
+      dl: [["v2rayNG اندروید (گیت‌هاب)", "https://github.com/2dust/v2rayNG/releases"], ["v2rayN ویندوز (گیت‌هاب)", "https://github.com/2dust/v2rayN/releases"], ["Hiddify همه پلتفرم‌ها (گیت‌هاب)", "https://github.com/hiddify/hiddify-app/releases"], ["Streisand آیفون (App Store)", "https://apps.apple.com/app/id6450534064"], ["V2Box آیفون (App Store)", "https://apps.apple.com/app/id6446814690"]],
+      dln: "تو گیت‌هاب برای اندروید فایل APK رو بگیر؛ اگه مطمئن نیستی کدوم مناسبه، نسخه universal رو انتخاب کن.", steps: [
       ["اپ رو نصب کن", "تو اندروید v2rayNG، تو ویندوز v2rayN. برای آیفون ادمین بهت اپ مناسب رو معرفی می‌کنه.", "down"],
       ["لینک کانفیگ رو کپی کن", "بعد از خرید، لینک اشتراک یا کانفیگ رو از ادمین می‌گیری.", "copy"],
       ["ایمپورتش کن", "تو اپ + رو بزن و «Import config from clipboard» رو انتخاب کن. یا از ابزار «لینک یا کانفیگ داری؟» همین پایین استفاده کن.", "plus"],
@@ -1271,8 +1325,10 @@ footer b{color:var(--a);font-weight:600}
     $$("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.g === k));
     $("#gbox").innerHTML =
       `<div class="gapp"><div class="pi">${ico("phone")}</div><div><b>${g.app}</b><small>${g.plat}</small></div></div>` +
+      `<div class="dls">${g.dl.map((d, i) => `<button class="dl" data-i="${i}">${ico("down")}<span>${d[0]}</span></button>`).join("")}</div><p class="dln">${g.dln}</p>` +
       g.steps.map(s => `<div class="step"><div class="n">${ico(s[2])}</div><div><b>${s[0]}</b><small>${s[1]}</small></div></div>`).join("") +
       `<p class="gnote">هنوز وصل نشدی؟ نگران نباش، تو پیوی پیام بده تا همراهیت کنیم.</p>`;
+    $$("#gbox .dl").forEach(b => b.onclick = () => { haptic(); openExt(g.dl[+b.dataset.i][1]); });
   }
   $$("#tabs button").forEach(b => b.addEventListener("click", () => { showGuide(b.dataset.g); haptic(); }));
   showGuide("wg");
@@ -1288,7 +1344,7 @@ footer b{color:var(--a);font-weight:600}
     }
     if (/\[Interface\]/i.test(v)) {
       const awg = /^\s*(Jc|Jmin|Jmax|S1|S2|H1|H2|H3|H4)\s*=/mi.test(v);
-      return { type: awg ? "کانفیگ AmneziaWG" : "کانفیگ WireGuard", kind: "file", file: "ferdosi.conf", note: "فایل رو ذخیره کن و تو اپ " + (awg ? "AmneziaWG" : "WireGuard") + " با Import from file وارد کن." };
+      return { type: awg ? "کانفیگ Amenzia" : "کانفیگ WireGuard", kind: "file", file: "ferdosi.conf", note: "فایل رو ذخیره کن و تو اپ " + (awg ? "Amenzia" : "WireGuard") + " با Import from file وارد کن." };
     }
     if (/^\s*client\b/m.test(v) && /^\s*remote\s/m.test(v)) return { type: "پروفایل OpenVPN", kind: "file", file: "ferdosi.ovpn", note: "فایل رو ذخیره کن و تو OpenVPN Connect با Upload File وارد کن." };
     return { type: "نوع کانفیگ شناسایی نشد", kind: "none", note: "لینک یا متن کامل کانفیگ رو بچسبون. اگه مطمئنی درسته، تو پیوی از ادمین بپرس." };
@@ -1338,8 +1394,8 @@ footer b{color:var(--a);font-weight:600}
     setTimeout(() => { $$(".q").forEach((q, i) => q.classList.toggle("open", i === n)); }, 350);
   }
   const INDEX = [
-    { t: "پلن تست ۲ دقیقه‌ای", s: "رایگان، قبل از خرید امتحان کن", i: "flask", k: "تست رایگان امتحان دو دقیقه ۲ دقیقه free trial", a: () => go("p-test") },
-    { t: "پلن GAMING نامحدود", s: money(P.gaming) + " تومان • WireGuard و AmneziaWG", i: "game", k: "گیم گیمینگ بازی gaming پینگ نامحدود amnezia amenzia وایرگارد", a: () => go("p-gaming") },
+    { t: "پلن تست ۲ دقیقه‌ای", s: "به‌زودی", i: "flask", k: "تست رایگان امتحان دو دقیقه ۲ دقیقه free trial", a: () => go("p-test") },
+    { t: "پلن GAMING نامحدود", s: money(P.gaming) + " تومان • WireGuard و Amenzia", i: "game", k: "گیم گیمینگ بازی gaming پینگ نامحدود amnezia amenzia amenziawg امنزیا آمنزیا وایرگارد", a: () => go("p-gaming") },
     { t: "پلن VIP نامحدود", s: money(P.vip) + " تومان • WireGuard و OpenVPN", i: "crown", k: "وی آی پی vip معمولی ارزان نامحدود openvpn", a: () => go("p-vip") },
     { t: "پلن V2RayNG حجمی", s: "هر گیگ " + money(P.gb) + " تومان", i: "zap", k: "وی تو ری v2ray v2rayng حجمی گیگ حجم کاربر ماه قیمت", a: () => go("p-v2ray") },
     { t: "قیمت‌ها و ماشین‌حساب حجم", s: "حجم، کاربر و ماه دلخواه", i: "bag", k: "قیمت تعرفه هزینه محاسبه گیگ کاربر اضافه ماه اضافه", a: () => go("p-v2ray") },
@@ -1353,53 +1409,4 @@ footer b{color:var(--a);font-weight:600}
     { t: "هدیه دادن اشتراک", s: "تو سبد خرید روشنش کن", i: "gift", k: "هدیه کادو gift برای دوستم اشتراک", a: () => openCart() },
     { t: "رسید ثبت سفارش", s: "تصویر قابل ذخیره و اشتراک", i: "receipt", k: "رسید فاکتور سفارش عکس ذخیره", a: () => openCart() },
     { t: "لینک یا کانفیگ داری؟", s: "باز کردن مستقیم تو اپ", i: "link", k: "لینک کانفیگ کپی ایمپورت vless vmess اشتراک sub باز کردن اپ", a: () => go("t-cfg") },
-    { t: "آموزش WireGuard", s: "نصب و ایمپورت کانفیگ", i: "book", k: "وایرگارد wireguard آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("wg"); } },
-    { t: "آموزش AmneziaWG", s: "نصب و ایمپورت کانفیگ", i: "book", k: "امنزیا amnezia amenzia awg amneziawg آموزش نصب اتصال راهنما", a: () => { go("guide"); showGuide("awg"); } },
-    { t: "آموزش OpenVPN", s: "ایمپورت فایل ovpn", i: "book", k: "اوپن وی پی ان openvpn ovpn آموزش نصب اتصال", a: () => { go("guide"); showGuide("ovpn"); } },
-    { t: "آموزش V2RayNG", s: "اندروید، ویندوز و iOS", i: "book", k: "v2ray v2rayng v2rayn آیفون ios اندروید ویندوز آموزش نصب لینک", a: () => { go("guide"); showGuide("v2"); } },
-    { t: "خرید چطوریه؟", s: "مراحل سفارش و تحویل", i: "bag", k: "خرید سفارش پرداخت تحویل مراحل کارت", a: () => go("guide") },
-    { t: "کدوم پلن برای گیم بهتره؟", s: "سؤال متداول", i: "help", k: "سوال گیم بهتر پلن بازی", a: () => openFaq(0) },
-    { t: "فرق نامحدود با حجمی", s: "سؤال متداول", i: "help", k: "سوال فرق نامحدود حجمی", a: () => openFaq(1) },
-    { t: "پرداخت و تحویل", s: "سؤال متداول", i: "help", k: "سوال پرداخت تحویل کانفیگ زمان", a: () => openFaq(2) },
-    { t: "وصل نشدم، چیکار کنم؟", s: "سؤال متداول", i: "help", k: "وصل نمیشه مشکل اتصال خطا کار نمیکنه رفع", a: () => openFaq(3) },
-    { t: "ارتباط با پشتیبانی", s: "پیوی ادمین", i: "chat", k: "پشتیبانی ادمین پیوی پیام تماس ارتباط پشتیبان", a: () => openAdmin("") }
-  ];
-  const SUGG = ["تست", "گیم", "قیمت", "آیفون", "وایرگارد", "تخفیف", "هدیه"];
-  const itemHtml = it => `<button class="sitem" data-id="${INDEX.indexOf(it)}"><div class="pi">${ico(it.i)}</div><div><b>${it.t}</b><small>${it.s}</small></div></button>`;
-  function bindSearch() {
-    $$("#sres .sitem").forEach(b => b.addEventListener("click", () => { const it = INDEX[+b.dataset.id]; haptic(); hide("ssheet"); setTimeout(it.a, 250); }));
-    $$("#sres .sugg button").forEach(b => b.addEventListener("click", () => { $("#sinp").value = b.dataset.q; renderSearch(b.dataset.q); }));
-  }
-  function renderSearch(q) {
-    const box = $("#sres"), nq = norm(q);
-    if (!nq) {
-      box.innerHTML = `<div class="lbl">پیشنهادها</div><div class="sugg">${SUGG.map(s => `<button data-q="${s}">${s}</button>`).join("")}</div><div class="lbl" style="margin-top:8px">میانبرها</div>` + INDEX.slice(0, 6).map(itemHtml).join("");
-      bindSearch(); return;
-    }
-    const words = nq.split(" ");
-    const res = INDEX.filter(it => { const hay = norm(it.t + " " + it.s + " " + it.k); return words.every(w => hay.includes(w)); });
-    if (!res.length) {
-      box.innerHTML = `<div class="sempty">چیزی پیدا نکردم.<br>یه کلمه دیگه امتحان کن یا بیا پیوی بپرس.</div><button class="btn ghost" id="sAsk">${ico("chat")}بپرس از پشتیبانی</button>`;
-      $("#sAsk").onclick = () => openAdmin(""); return;
-    }
-    box.innerHTML = res.map(itemHtml).join(""); bindSearch();
-  }
-  function openSearch() {
-    hide("sheet"); show("ssheet");
-    $("#sinp").value = ""; renderSearch("");
-    setTimeout(() => $("#sinp").focus(), 300); haptic();
-  }
-  $("#sbar").addEventListener("click", openSearch);
-  $("#navSearch").addEventListener("click", openSearch);
-  $("#sclose").addEventListener("click", () => { hide("ssheet"); $("#sinp").blur(); });
-  $("#sinp").addEventListener("input", e => renderSearch(e.target.value));
-
-  /* ---------- reveal ---------- */
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .06 });
-  $$(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 60 + "ms"; io.observe(el); });
-  const nio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { nio.disconnect(); loadIp(); } }), { threshold: .3 });
-  nio.observe($("#t-net"));
-})();
-</script>
-</body>
-</html>
+    { t: "آموزش WireGuard", s: "نصب و ایمپورت کانفیگ", i: "book", k: "وایرگارد w
